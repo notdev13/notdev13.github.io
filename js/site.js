@@ -122,7 +122,7 @@
     decideVideo();
 
     // ----- Casa em destaque -----
-    $("#destaque-foto").innerHTML = foto(d.foto, "Fachada: " + d.nome, { sizes: "(min-width: 821px) 64vw, 100vw" });
+    $("#destaque-foto").innerHTML = foto(d.foto, "Fachada: " + d.nome, { sizes: "100vw" });
     $("#destaque-local").textContent = [d.bairro, d.cidade].filter(Boolean).join(" · ");
     $("#destaque-nome").textContent = d.nome;
     const etiquetas = [];
@@ -133,31 +133,28 @@
     if (d.situacao) etiquetas.push(d.situacao);
     $("#destaque-etiquetas").innerHTML = etiquetas.map((e) => `<span>${esc(e)}</span>`).join("");
 
-    // ----- Grade de obras -----
-    const grade = $("#grade");
-    function renderObras(filtro) {
-      const lista = obras.filter((o) => filtro === "todas" || o.tipo === filtro);
-      grade.innerHTML = lista.map((o) => {
-        const local = [o.bairro, o.cidade].filter(Boolean).join(" · ");
-        const dadosObra = [o.area_m2 && o.area_m2 + " m²", o.suites && o.suites + " suítes", o.situacao].filter(Boolean);
-        return `<a class="card" href="#contato">
-          <div class="moldura">${foto(o.foto, o.nome)}${o.tipo === "casas" ? '<span class="selo">Campeche</span>' : ""}</div>
-          <span class="local">${local ? esc(local) : "Local " + pendente}</span>
-          <h3>${esc(o.nome)}</h3>
-          <span class="dados">${dadosObra.length ? dadosObra.map(esc).join(" · ") : "Área e tipologia " + pendente}</span>
-        </a>`;
-      }).join("");
-      $("#contagem").textContent = lista.length + (lista.length === 1 ? " obra" : " obras");
-    }
-    $$(".chip").forEach((c) => (c.onclick = () => {
-      $$(".chip").forEach((x) => x.setAttribute("aria-pressed", String(x === c)));
-      renderObras(c.dataset.filtro);
-    }));
-    renderObras("todas");
+    // ----- Obras: as casas do Campeche em cartões grandes; os residenciais numa faixa compacta -----
+    $("#grade").innerHTML = obras.filter((o) => o.tipo === "casas").map((o) => {
+      const local = [o.bairro, o.cidade].filter(Boolean).join(" · ");
+      const dadosObra = [o.area_m2 && o.area_m2 + " m²", o.suites && o.suites + " suítes", o.situacao].filter(Boolean);
+      return `<a class="card" href="#contato">
+        <div class="moldura">${foto(o.foto, o.nome, { sizes: "(min-width: 821px) 50vw, 100vw" })}</div>
+        <span class="local">${local ? esc(local) : "Local " + pendente}</span>
+        <h3>${esc(o.nome)}</h3>
+        <span class="dados">${dadosObra.length ? dadosObra.map(esc).join(" · ") : "Área e tipologia " + pendente}</span>
+      </a>`;
+    }).join("");
+    // Na faixa só foto e nome: os dados que a MB2 ainda não confirmou não aparecem
+    $("#faixa-residenciais").innerHTML = obras.filter((o) => o.tipo === "residenciais").map((o) => {
+      const local = [o.bairro, o.cidade].filter(Boolean).join(" · ");
+      return `<a class="card card-faixa" href="#contato">
+        <div class="moldura">${foto(o.foto, o.nome, { sizes: "(min-width: 821px) 22vw, 62vw" })}</div>
+        <h3>${esc(o.nome)}</h3>${local ? `<span class="local">${esc(local)}</span>` : ""}
+      </a>`;
+    }).join("");
 
     // ----- Fotos das outras seções -----
-    $("#historia-foto").innerHTML = `<img src="imagens/obras/07-aurora-garden-480.webp" srcset="imagens/obras/07-aurora-garden-480.webp 480w, imagens/obras/07-aurora-garden-1400.webp 1400w" sizes="100vw" alt="" loading="lazy">`;
-    $("#campeche-foto").innerHTML = foto("11-casa-jardim-campeche-288m2", "Casa da MB2 no Jardim Campeche", { sizes: "(min-width: 821px) 50vw, 100vw" });
+    $("#campeche-foto").innerHTML = foto("11-casa-jardim-campeche-288m2", "", { sizes: "100vw" });
 
     // ----- Contato: dados que a MB2 confirmar aparecem; os vazios ficam marcados -----
     const zap = $("#zap-fixo"), zapTexto = $("#zap-texto");

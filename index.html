@@ -85,51 +85,45 @@
   </section>
 
   <section class="destaque" id="destaque" aria-label="Casa em destaque">
-    <div class="foto" id="destaque-foto"></div>
-    <div class="painel">
-      <div class="wrap">
-        <span class="chapeu">Casa em destaque</span>
-        <div style="display:grid;gap:8px">
-          <span class="contato-dados" id="destaque-local"></span>
-          <h3 id="destaque-nome"></h3>
-        </div>
-        <div class="etiquetas" id="destaque-etiquetas"></div>
-        <a class="btn btn-claro" href="#contato" style="justify-self:start">Quero ver esta casa</a>
-      </div>
+    <div class="destaque-foto" id="destaque-foto"></div>
+    <div class="wrap destaque-conteudo">
+      <span class="chapeu">Casa em destaque</span>
+      <span class="destaque-local" id="destaque-local"></span>
+      <h3 id="destaque-nome"></h3>
+      <div class="etiquetas" id="destaque-etiquetas"></div>
+      <a class="btn btn-claro link-zap" href="#contato">Quero ver esta casa</a>
     </div>
   </section>
 
   <section class="secao wrap" id="obras">
-    <div class="obras-cabecalho">
-      <div style="display:grid;gap:12px">
-        <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Empreendimentos</span>
-        <h2>Nossas obras</h2>
-      </div>
-    </div>
-    <div class="filtros">
-      <div class="chips" role="group" aria-label="Filtrar obras">
-        <button class="chip" type="button" data-filtro="todas" aria-pressed="true">Todas</button>
-        <button class="chip" type="button" data-filtro="casas" aria-pressed="false">Casas no Campeche</button>
-        <button class="chip" type="button" data-filtro="residenciais" aria-pressed="false">Residenciais</button>
-      </div>
-      <span class="contagem" id="contagem"></span>
-    </div>
-    <div class="grade" id="grade"></div>
+    <header class="cabecalho obras-cabecalho">
+      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Empreendimentos</span>
+      <h2 class="titulo">Casas no <em>Campeche.</em></h2>
+    </header>
+    <div class="grade grade-casas" id="grade"></div>
+    <header class="cabecalho portfolio-cabecalho" id="portfolio">
+      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Portfólio</span>
+      <h2 class="titulo">Residenciais em <em>Curitiba e Itapoá.</em></h2>
+      <p class="portfolio-dica" aria-hidden="true">Arraste para ver</p>
+    </header>
+    <div class="faixa" id="faixa-residenciais" aria-label="Residenciais entregues"></div>
   </section>
 
-  <section class="historia" id="sobre" aria-label="Sobre a MB2">
-    <span id="historia-foto"></span>
+  <section class="secao historia" id="sobre" aria-label="Sobre a MB2">
+    <div class="wrap historia-texto">
+      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Construtora há 14 anos</span>
+      <h2>Começamos em Curitiba. <em class="italico">Escolhemos o Campeche para continuar.</em></h2>
+      <p>Viemos para Florianópolis porque o jeito de viver da Ilha e o mercado daqui combinam com as casas que fazemos.</p>
+      <dl class="numeros">
+        <div><dt>14</dt><dd>anos construindo</dd></div>
+        <div><dt>12</dt><dd>empreendimentos</dd></div>
+        <div><dt>3</dt><dd>cidades</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="secao como" id="como-construimos">
     <div class="wrap">
-      <div class="historia-texto">
-        <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Construtora há 14 anos</span>
-        <h2>Começamos em Curitiba. <em class="italico">Escolhemos o Campeche para continuar.</em></h2>
-        <p>Viemos para Florianópolis porque o jeito de viver da Ilha e o mercado daqui combinam com as casas que fazemos.</p>
-        <a class="btn btn-claro link-zap" href="#contato">Fale com a MB2</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="secao wrap" id="como-construimos">
     <header class="cabecalho">
       <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Do terreno à chave</span>
       <h2 class="titulo">Como <em>construímos.</em></h2>
@@ -140,11 +134,12 @@
       <li class="etapa"><span class="numero"><svg aria-hidden="true"><use href="#hx-o"/></svg><b>3</b></span><div class="texto"><h3>Obra</h3><p>Acompanhamos cada etapa de perto, da fundação ao acabamento, com materiais escolhidos para o clima da Ilha.</p></div></li>
       <li class="etapa"><span class="numero"><svg aria-hidden="true"><use href="#hx-o"/></svg><b>4</b></span><div class="texto"><h3>Entrega</h3><p>Você recebe a casa pronta para morar e continua falando com a mesma equipe que construiu.</p></div></li>
     </ol>
+    </div>
   </section>
 
-  <section class="secao campeche" id="campeche">
+  <section class="campeche" id="campeche">
+    <div class="campeche-foto" id="campeche-foto"></div>
     <div class="wrap">
-      <div id="campeche-foto"></div>
       <div class="campeche-texto">
         <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Onde construímos</span>
         <h2 class="titulo">Viver no <em>Campeche.</em></h2>
@@ -177,21 +172,15 @@
     </div>
   </section>
 
-  <section class="lancamentos" aria-label="Lançamentos">
+  <section class="secao chamada" aria-label="Fale com a MB2">
     <div class="wrap">
-      <div>
-        <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Lançamentos</span>
-        <h2>Saiba antes das <em class="italico">próximas casas da MB2.</em></h2>
+      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Fale com quem constrói</span>
+      <h2 class="titulo">Quer conhecer uma casa <em>da MB2?</em></h2>
+      <p>A gente mostra a obra de perto, manda plantas e condições, e quem responde é a equipe que constrói.</p>
+      <div class="chamada-botoes">
+        <a class="btn btn-escuro link-zap" href="#contato">Fale com a MB2</a>
+        <a class="btn btn-contorno" href="#obras">Ver as casas</a>
       </div>
-      <form id="form-lancamentos" novalidate>
-        <label class="sr-only" for="email">Seu e-mail</label>
-        <div class="campo">
-          <input id="email" type="email" placeholder="Seu e-mail" autocomplete="email">
-          <button type="submit">Inscrever</button>
-        </div>
-        <label class="consentimento"><input id="consentimento" type="checkbox"> Ao se cadastrar você concorda com a nossa política de privacidade.</label>
-        <p class="aviso" id="aviso-lancamentos" hidden></p>
-      </form>
     </div>
   </section>
 </main>
@@ -207,14 +196,30 @@
       <span title="YouTube: a confirmar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg></span>
     </div>
   </div>
+    <div class="lancamentos" aria-label="Lançamentos">
+      <div class="wrap">
+        <div>
+          <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Lançamentos</span>
+          <h2>Saiba antes das <em class="italico">próximas casas da MB2.</em></h2>
+        </div>
+        <form id="form-lancamentos" novalidate>
+          <label class="sr-only" for="email">Seu e-mail</label>
+          <div class="campo">
+            <input id="email" type="email" placeholder="Seu e-mail" autocomplete="email">
+            <button type="submit">Inscrever</button>
+          </div>
+          <label class="consentimento"><input id="consentimento" type="checkbox"> Ao se cadastrar você concorda com a nossa política de privacidade.</label>
+          <p class="aviso" id="aviso-lancamentos" hidden></p>
+        </form>
+      </div>
+    </div>
   <div class="wrap rodape-colunas">
     <div>
       <h4>Empreendimentos</h4>
       <ul>
         <li><a href="#obras">Casas no Campeche</a></li>
-        <li><a href="#obras">Residenciais</a></li>
-        <li><a href="#obras">Todas as obras</a></li>
-      </ul>
+        <li><a href="#portfolio">Residenciais</a></li>
+              </ul>
     </div>
     <div>
       <h4>Institucional</h4>
