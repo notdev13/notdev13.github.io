@@ -413,27 +413,6 @@ button { font: inherit; cursor: pointer; color: inherit; }
 .hero-rolar i { display: block; width: 1px; height: 44px; background: linear-gradient(var(--cobre-claro), transparent); animation: hero-rolar 2.2s ease-in-out infinite; }
 @keyframes hero-rolar { 0% { transform: scaleY(0); transform-origin: top; opacity: 0; } 35% { transform: scaleY(1); transform-origin: top; opacity: 1; } 70% { transform: scaleY(1); transform-origin: bottom; opacity: 1; } 100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; } }
 
-/* Faixa de apresentação: o cartão MB2 do fim do vídeo vira o fundo que liga o topo à casa em destaque */
-.apresentacao {
-  position: relative;
-  background: #0d0c0b url("../video/cartao-mb2.jpg") center / cover no-repeat;
-  color: var(--areia);
-  overflow: hidden;
-}
-.apresentacao::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(13, 12, 11, 0.96) 0%, rgba(13, 12, 11, 0.9) 45%, rgba(13, 12, 11, 0.55) 100%);
-}
-.apresentacao .wrap { position: relative; padding-block: var(--e-48); }
-.apresentacao p {
-  max-width: 34ch;
-  font-size: var(--t-20);
-  font-weight: 300;
-  line-height: 1.45;
-  color: var(--concreto);
-}
 .tracos { display: flex; gap: var(--e-8); }
 .tracos button {
   min-width: var(--toque);
@@ -466,8 +445,6 @@ button { font: inherit; cursor: pointer; color: inherit; }
   .hero-cartao { justify-self: end; min-width: 260px; }
   .hero.com-video .hero-video { display: block; }
   .hero.com-video .hero-foto, .hero.com-video .tracos, .hero.com-video .so-fotos { display: none; }
-  .apresentacao .wrap { padding-block: var(--e-64); }
-  .apresentacao p { font-size: var(--t-28); max-width: 30ch; }
 }
 .hero-pausa { display: none; margin-left: auto; }
 .hero-pausa .ic-play, .hero-pausa[aria-pressed="true"] .ic-pause { display: none; }
