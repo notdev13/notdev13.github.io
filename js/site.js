@@ -4,7 +4,11 @@
   const $ = (s, r) => (r || document).querySelector(s);
   const $$ = (s, r) => [...(r || document).querySelectorAll(s)];
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  const pendente = '<span class="pendente">a confirmar</span>';
+  // Textos montados aqui passam pela tradução (js/i18n.js); sem ela, fica o português
+  const tr = (chave, pt) => (window.MB2_I18N ? window.MB2_I18N.t(chave) : pt);
+  const pendente = () => `<span class="pendente">${tr("pendente", "a confirmar")}</span>`;
+  // "Casa alto padrão" é descrição, não nome próprio: traduz só esse começo
+  const nomeTraduzido = (nome) => String(nome).replace(/^Casa alto padrão/, () => tr("obra.casa", "Casa alto padrão"));
   const semMovimento = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const computador = matchMedia("(min-width: 821px)");
 
@@ -19,7 +23,7 @@
     menuMovel.hidden = !abre;
     topo.classList.toggle("aberto", abre);
     menuBtn.setAttribute("aria-expanded", String(abre));
-    menuBtn.setAttribute("aria-label", abre ? "Fechar menu" : "Abrir menu");
+    menuBtn.setAttribute("aria-label", abre ? tr("nav.fecharMenu", "Fechar menu") : tr("nav.abrirMenu", "Abrir menu"));
     document.body.style.overflow = abre ? "hidden" : "";
     topo.classList.toggle("no-topo", !abre && scrollY < 10);
   }
@@ -30,11 +34,23 @@
   // ---------- Tema claro / escuro ----------
   // Abre sempre claro; o botão liga o escuro só durante a visita
   const temaBtn = $("#tema-btn"), raiz = document.documentElement;
+  function rotuloTema() {
+    const escuro = raiz.getAttribute("data-theme") === "dark";
+    temaBtn.setAttribute("aria-pressed", String(escuro));
+    temaBtn.setAttribute("aria-label", escuro ? tr("tema.claro", "Ativar tema claro") : tr("tema.escuro", "Ativar tema escuro"));
+  }
   temaBtn.addEventListener("click", () => {
     const escuro = raiz.getAttribute("data-theme") !== "dark";
     if (escuro) raiz.setAttribute("data-theme", "dark"); else raiz.removeAttribute("data-theme");
-    temaBtn.setAttribute("aria-pressed", String(escuro));
-    temaBtn.setAttribute("aria-label", escuro ? "Ativar tema claro" : "Ativar tema escuro");
+    rotuloTema();
+  });
+  rotuloTema();
+
+  // Troca de idioma: refaz os rótulos que este arquivo escreve
+  document.addEventListener("mb2:lang", () => {
+    rotuloTema();
+    menuBtn.setAttribute("aria-label", menuMovel.hidden ? tr("nav.abrirMenu", "Abrir menu") : tr("nav.fecharMenu", "Fechar menu"));
+    $("#aviso-lancamentos").hidden = true;
   });
 
   // No alto da página o menu fica sem fundo; depois que passa do botão do topo, esmaece
@@ -53,7 +69,7 @@
     .then((r) => r.json())
     .then(montar)
     .catch(() => {
-      $("#grade").innerHTML = '<p class="aviso">Não consegui carregar a lista de obras. Recarregue a página.</p>';
+      $("#grade").innerHTML = `<p class="aviso">${tr("obras.erro", "Não consegui carregar a lista de obras. Recarregue a página.")}</p>`;
     });
 
   function montar(dados) {
@@ -67,14 +83,14 @@
     ).join("");
     const fotos = $$(".hero-foto", fotosWrap);
     let atual = 0, relogio;
-    tracos.innerHTML = dados.topo.map((_, i) => `<button type="button" aria-label="Foto ${i + 1}"></button>`).join("");
+    tracos.innerHTML = dados.topo.map(() => '<button type="button"></button>').join("");
     const botoesTraco = $$("button", tracos);
     botoesTraco.forEach((b, i) => (b.onclick = () => irPara(i, true)));
     function irPara(i, manual) {
       atual = (i + fotos.length) % fotos.length;
       fotos.forEach((f, j) => f.classList.toggle("ativa", j === atual));
       botoesTraco.forEach((b, j) => b.setAttribute("aria-current", String(j === atual)));
-      legenda.textContent = dados.topo[atual].legenda;
+      if (!hero.classList.contains("com-video")) legenda.textContent = nomeTraduzido(dados.topo[atual].legenda);
       if (manual) reiniciar();
     }
     function reiniciar() {
@@ -101,7 +117,7 @@
     function sincronizaPausa() {
       const parado = video.paused;
       pausa.setAttribute("aria-pressed", String(parado));
-      pausa.setAttribute("aria-label", parado ? "Continuar vídeo" : "Pausar vídeo");
+      pausa.setAttribute("aria-label", parado ? tr("hero.continuar", "Continuar vídeo") : tr("hero.pausar", "Pausar vídeo"));
     }
     function ligaVideo() {
       const rede = navigator.connection || {};
@@ -111,43 +127,61 @@
       video.src = lenta ? "video/hero-mb2-480.mp4" : grande ? "video/hero-mb2-hd.mp4" : "video/hero-mb2.mp4";
       hero.classList.add("com-video");
       clearInterval(relogio);
-      cartaoTitulo.textContent = "Tour em vídeo";
-      legenda.textContent = [d.nome, d.area_m2 && d.area_m2 + " m²"].filter(Boolean).join(" · ");
+      textosTopo();
       if (!semMovimento) video.play().catch(() => {});
       sincronizaPausa();
     }
     video.addEventListener("play", sincronizaPausa);
     video.addEventListener("pause", sincronizaPausa);
     pausa.onclick = () => (video.paused ? video.play().catch(() => {}) : video.pause());
+    function textosTopo() {
+      botoesTraco.forEach((b, i) => b.setAttribute("aria-label", tr("hero.foto", "Foto") + " " + (i + 1)));
+      if (hero.classList.contains("com-video")) {
+        cartaoTitulo.textContent = tr("hero.tour", "Tour em vídeo");
+        legenda.textContent = [nomeTraduzido(d.nome), d.area_m2 && d.area_m2 + " m²"].filter(Boolean).join(" · ");
+      } else {
+        cartaoTitulo.textContent = tr("hero.cartao", "Nossas casas");
+        legenda.textContent = nomeTraduzido(dados.topo[atual].legenda);
+      }
+      sincronizaPausa();
+    }
+    textosTopo();
     ligaVideo();
 
     // ----- Casa em destaque -----
-    $("#destaque-foto").innerHTML = foto(d.foto, "Fachada: " + d.nome, { sizes: "(min-width: 821px) 64vw, 100vw" });
+    $("#destaque-foto").innerHTML = foto(d.foto, "", { sizes: "(min-width: 821px) 64vw, 100vw" });
     $("#destaque-local").textContent = [d.bairro, d.cidade].filter(Boolean).join(" · ");
-    $("#destaque-nome").textContent = d.nome;
-    const etiquetas = [];
-    if (d.area_m2) etiquetas.push(d.area_m2 + " m²");
-    if (d.suites) etiquetas.push(d.suites + " suítes");
-    if (d.vagas) etiquetas.push(d.vagas + " vagas");
-    if (d.bairro) etiquetas.push(d.bairro);
-    if (d.situacao) etiquetas.push(d.situacao);
-    $("#destaque-etiquetas").innerHTML = etiquetas.map((e) => `<span>${esc(e)}</span>`).join("");
+    function textosDestaque() {
+      $("#destaque-foto img").alt = tr("dest.fachada", "Fachada:") + " " + nomeTraduzido(d.nome);
+      $("#destaque-nome").textContent = nomeTraduzido(d.nome);
+      const etiquetas = [];
+      if (d.area_m2) etiquetas.push(d.area_m2 + " m²");
+      if (d.suites) etiquetas.push(d.suites + " " + tr("obras.suites", "suítes"));
+      if (d.vagas) etiquetas.push(d.vagas + " " + tr("obras.vagas", "vagas"));
+      if (d.bairro) etiquetas.push(d.bairro);
+      if (d.situacao) etiquetas.push(d.situacao);
+      $("#destaque-etiquetas").innerHTML = etiquetas.map((e) => `<span>${esc(e)}</span>`).join("");
+    }
+    textosDestaque();
 
     // ----- Grade de obras -----
     const grade = $("#grade");
+    let filtroAtual = "todas";
     function renderObras(filtro) {
+      filtroAtual = filtro;
       const lista = obras.filter((o) => filtro === "todas" || o.tipo === filtro);
       grade.innerHTML = lista.map((o) => {
         const local = [o.bairro, o.cidade].filter(Boolean).join(" · ");
-        const dadosObra = [o.area_m2 && o.area_m2 + " m²", o.suites && o.suites + " suítes", o.situacao].filter(Boolean);
+        const dadosObra = [o.area_m2 && o.area_m2 + " m²", o.suites && o.suites + " " + tr("obras.suites", "suítes"), o.situacao].filter(Boolean);
+        const nome = nomeTraduzido(o.nome);
         return `<a class="card" href="#contato">
-          <div class="moldura">${foto(o.foto, o.nome)}${o.tipo === "casas" ? '<span class="selo">Campeche</span>' : ""}</div>
-          <span class="local">${local ? esc(local) : "Local " + pendente}</span>
-          <h3>${esc(o.nome)}</h3>
-          <span class="dados">${dadosObra.length ? dadosObra.map(esc).join(" · ") : "Área e tipologia " + pendente}</span>
+          <div class="moldura">${foto(o.foto, nome)}${o.tipo === "casas" ? '<span class="selo">Campeche</span>' : ""}</div>
+          <span class="local">${local ? esc(local) : tr("obras.local", "Local") + " " + pendente()}</span>
+          <h3>${esc(nome)}</h3>
+          <span class="dados">${dadosObra.length ? dadosObra.map(esc).join(" · ") : tr("obras.areaTipo", "Área e tipologia") + " " + pendente()}</span>
         </a>`;
       }).join("");
-      $("#contagem").textContent = lista.length + (lista.length === 1 ? " obra" : " obras");
+      $("#contagem").textContent = lista.length + " " + (lista.length === 1 ? tr("obras.obra", "obra") : tr("obras.obras", "obras"));
     }
     $$(".chip").forEach((c) => (c.onclick = () => {
       $$(".chip").forEach((x) => x.setAttribute("aria-pressed", String(x === c)));
@@ -157,7 +191,7 @@
 
     // ----- Fotos das outras seções -----
     $("#historia-foto").innerHTML = `<img src="imagens/obras/07-aurora-garden-480.webp" srcset="imagens/obras/07-aurora-garden-480.webp 480w, imagens/obras/07-aurora-garden-1400.webp 1400w" sizes="100vw" alt="" loading="lazy">`;
-    $("#campeche-foto").innerHTML = foto("11-casa-jardim-campeche-288m2", "Casa da MB2 no Jardim Campeche", { sizes: "(min-width: 821px) 50vw, 100vw" });
+    $("#campeche-foto").innerHTML = foto("11-casa-jardim-campeche-288m2", "", { sizes: "(min-width: 821px) 50vw, 100vw" });
 
     // ----- Contato: dados que a MB2 confirmar aparecem; os vazios ficam marcados -----
     const zap = $("#zap-fixo"), zapTexto = $("#zap-texto");
@@ -166,17 +200,29 @@
       zap.href = "https://wa.me/" + n;
       zap.target = "_blank";
       zap.rel = "noopener";
+      zapTexto.removeAttribute("data-i18n");
       zapTexto.textContent = "WhatsApp";
       $$(".link-zap").forEach((a) => { a.href = zap.href; a.target = "_blank"; a.rel = "noopener"; });
     }
-    $("#dados-contato").innerHTML =
-      `Telefone e WhatsApp: ${empresa.whatsapp ? esc(empresa.whatsapp) : pendente} &nbsp;·&nbsp; E-mail: ${empresa.email ? esc(empresa.email) : pendente}`;
-    $("#rodape-contato").innerHTML = [
-      ["Telefone", empresa.telefone || empresa.whatsapp],
-      ["E-mail", empresa.email],
-      ["Endereço", empresa.endereco],
-      ["CNPJ", empresa.cnpj]
-    ].map(([k, v]) => `<li>${k} ${v ? esc(v) : pendente}</li>`).join("");
+    function textosContato() {
+      $("#campeche-foto img").alt = tr("camp.fotoAlt", "Casa da MB2 no Jardim Campeche");
+      $("#dados-contato").innerHTML =
+        `${tr("cont.telZap", "Telefone e WhatsApp")}: ${empresa.whatsapp ? esc(empresa.whatsapp) : pendente()} &nbsp;·&nbsp; ${tr("rod.email", "E-mail")}: ${empresa.email ? esc(empresa.email) : pendente()}`;
+      $("#rodape-contato").innerHTML = [
+        [tr("rod.telefone", "Telefone"), empresa.telefone || empresa.whatsapp],
+        [tr("rod.email", "E-mail"), empresa.email],
+        [tr("rod.endereco", "Endereço"), empresa.endereco],
+        [tr("rod.cnpj", "CNPJ"), empresa.cnpj]
+      ].map(([k, v]) => `<li>${k} ${v ? esc(v) : pendente()}</li>`).join("");
+    }
+    textosContato();
+
+    document.addEventListener("mb2:lang", () => {
+      textosTopo();
+      textosDestaque();
+      renderObras(filtroAtual);
+      textosContato();
+    });
     if (empresa.instagram) {
       const ig = $("#instagram");
       ig.href = empresa.instagram;
@@ -189,8 +235,8 @@
     e.preventDefault();
     const aviso = $("#aviso-lancamentos"), email = $("#email").value.trim();
     aviso.hidden = false;
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { aviso.textContent = "Digite um e-mail válido, como nome@exemplo.com."; return; }
-    if (!$("#consentimento").checked) { aviso.textContent = "Marque a caixa da política de privacidade para continuar."; return; }
-    aviso.textContent = "Esta é uma prévia: o cadastro ainda não está ligado a uma lista de e-mails.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { aviso.textContent = tr("lanc.erroEmail", "Digite um e-mail válido, como nome@exemplo.com."); return; }
+    if (!$("#consentimento").checked) { aviso.textContent = tr("lanc.erroConsent", "Marque a caixa da política de privacidade para continuar."); return; }
+    aviso.textContent = tr("lanc.previa", "Esta é uma prévia: o cadastro ainda não está ligado a uma lista de e-mails.");
   });
 })();

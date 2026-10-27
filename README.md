@@ -16,6 +16,12 @@ o que não funciona abrindo o arquivo direto.
   tema claro; o botão lua/sol do menu liga o escuro só durante a visita.
 - `js/site.js`: menu, fotos do topo (vídeo só no computador), grade de obras,
   contato e cadastro. Sem dependências.
+- `js/i18n.js`: tradução própria em português, inglês, espanhol e francês (mesmo
+  mecanismo do site da Dra. Grazi). O português sai do próprio HTML; para traduzir
+  um texto novo, marque o elemento com `data-i18n="chave"` (ou
+  `data-i18n-attr="aria-label:chave"`) e escreva a frase nas três línguas no
+  arquivo. Chave sem tradução continua em português. A escolha fica guardada no
+  aparelho; na primeira visita, vale o idioma do navegador.
 - `dados/obras.json`: dados da empresa, a casa em destaque, as 12 obras e as
   fotos do topo. Campo vazio ou `null` aparece como "a confirmar" ou some.
 - `imagens/obras/`: cada foto em 480 px (celular) e 1400 px (computador), WebP.
