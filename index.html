@@ -84,22 +84,15 @@
     </div>
   </section>
 
-  <section class="secao wrap" id="obras">
-    <div class="obras-cabecalho">
-      <div style="display:grid;gap:12px">
-        <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Empreendimentos</span>
-        <h2>Nossas obras</h2>
-      </div>
+  <section class="destaque" id="destaque" aria-label="Casa em destaque">
+    <div class="destaque-foto" id="destaque-foto"></div>
+    <div class="wrap destaque-conteudo">
+      <span class="chapeu">Casa em destaque</span>
+      <span class="destaque-local" id="destaque-local"></span>
+      <h3 id="destaque-nome"></h3>
+      <div class="etiquetas" id="destaque-etiquetas"></div>
+      <a class="btn btn-claro link-zap" href="#contato">Quero ver esta casa</a>
     </div>
-    <div class="filtros">
-      <div class="chips" role="group" aria-label="Filtrar obras">
-        <button class="chip" type="button" data-filtro="todas" aria-pressed="true">Todas</button>
-        <button class="chip" type="button" data-filtro="casas" aria-pressed="false">Casas no Campeche</button>
-        <button class="chip" type="button" data-filtro="residenciais" aria-pressed="false">Residenciais</button>
-      </div>
-      <span class="contagem" id="contagem"></span>
-    </div>
-    <div class="grade" id="grade"></div>
   </section>
 
   <section class="secao wrap" id="como-construimos">
@@ -144,7 +137,6 @@
 
   <section class="secao campeche" id="campeche">
     <div class="wrap">
-      <div id="campeche-foto"></div>
       <div class="campeche-texto">
         <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Onde construímos</span>
         <h2 class="titulo">Viver no <em>Campeche.</em></h2>
@@ -177,21 +169,15 @@
     </div>
   </section>
 
-  <section class="lancamentos" aria-label="Lançamentos">
+  <section class="secao chamada" aria-label="Fale com a MB2">
     <div class="wrap">
-      <div>
-        <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Lançamentos</span>
-        <h2>Saiba antes das <em class="italico">próximas casas da MB2.</em></h2>
+      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Fale com quem constrói</span>
+      <h2 class="titulo">Quer conhecer uma casa <em>da MB2?</em></h2>
+      <p>A gente mostra a obra de perto, manda plantas e condições, e quem responde é a equipe que constrói.</p>
+      <div class="chamada-botoes">
+        <a class="btn btn-escuro link-zap" href="#contato">Fale com a MB2</a>
+        <a class="btn btn-contorno" href="#obras">Ver as casas</a>
       </div>
-      <form id="form-lancamentos" novalidate>
-        <label class="sr-only" for="email">Seu e-mail</label>
-        <div class="campo">
-          <input id="email" type="email" placeholder="Seu e-mail" autocomplete="email">
-          <button type="submit">Inscrever</button>
-        </div>
-        <label class="consentimento"><input id="consentimento" type="checkbox"> Ao se cadastrar você concorda com a nossa política de privacidade.</label>
-        <p class="aviso" id="aviso-lancamentos" hidden></p>
-      </form>
     </div>
   </section>
 </main>
@@ -207,14 +193,30 @@
       <span title="YouTube: a confirmar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg></span>
     </div>
   </div>
+    <div class="lancamentos" aria-label="Lançamentos">
+      <div class="wrap">
+        <div>
+          <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Lançamentos</span>
+          <h2>Saiba antes das <em class="italico">próximas casas da MB2.</em></h2>
+        </div>
+        <form id="form-lancamentos" novalidate>
+          <label class="sr-only" for="email">Seu e-mail</label>
+          <div class="campo">
+            <input id="email" type="email" placeholder="Seu e-mail" autocomplete="email">
+            <button type="submit">Inscrever</button>
+          </div>
+          <label class="consentimento"><input id="consentimento" type="checkbox"> Ao se cadastrar você concorda com a nossa política de privacidade.</label>
+          <p class="aviso" id="aviso-lancamentos" hidden></p>
+        </form>
+      </div>
+    </div>
   <div class="wrap rodape-colunas">
     <div>
       <h4>Empreendimentos</h4>
       <ul>
         <li><a href="#obras">Casas no Campeche</a></li>
-        <li><a href="#obras">Residenciais</a></li>
-        <li><a href="#obras">Todas as obras</a></li>
-      </ul>
+        <li><a href="#portfolio">Residenciais</a></li>
+              </ul>
     </div>
     <div>
       <h4>Institucional</h4>
