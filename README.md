@@ -19,7 +19,7 @@ o que não funciona abrindo o arquivo direto.
 - `dados/obras.json`: dados da empresa, a casa em destaque, as 12 obras e as
   fotos do topo. Campo vazio ou `null` aparece como "a confirmar" ou some.
 - `imagens/obras/`: cada foto em 480 px (celular) e 1400 px (computador), WebP.
-- `video/`: tour em vídeo do topo (só no computador) e posters.
+- `video/`: tour em vídeo do topo (só no computador) e posters. `hero-mb2.mp4` é 720p (~6 MB) e `hero-mb2-480.mp4` é a versão leve (~3 MB) usada em máquinas fracas, conexões lentas ou telas menores que 1100 px; ambas sem áudio, H.264, 27 s.
 - `.nojekyll`: diz ao GitHub Pages para publicar os arquivos como estão.
 
 ## Para atualizar

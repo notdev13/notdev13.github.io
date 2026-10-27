@@ -107,7 +107,16 @@
         if (hero.classList.contains("com-video")) { video.pause(); hero.classList.remove("com-video"); cartaoTitulo.textContent = "Nossas casas"; irPara(0); reiniciar(); }
         return;
       }
-      if (!video.src) { video.poster = "video/poster-1400.jpg"; video.src = "video/hero-mb2.mp4"; }
+      if (!video.src) {
+        // Máquina fraca ou conexão lenta recebe a versão 480p (3 MB); as demais, 720p (6 MB)
+        const rede = navigator.connection || {};
+        const leve = rede.saveData || /(^|\b)(slow-2g|2g|3g)\b/.test(rede.effectiveType || "") ||
+          (navigator.deviceMemory && navigator.deviceMemory <= 2) ||
+          (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) ||
+          window.innerWidth < 1100;
+        video.poster = "video/poster-1400.jpg";
+        video.src = leve ? "video/hero-mb2-480.mp4" : "video/hero-mb2.mp4";
+      }
       hero.classList.add("com-video");
       clearInterval(relogio);
       cartaoTitulo.textContent = "Tour em vídeo";
