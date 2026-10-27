@@ -128,6 +128,8 @@
       video.src = lenta ? "video/hero-mb2-480.mp4" : grande ? "video/hero-mb2-hd.mp4" : "video/hero-mb2.mp4";
       hero.classList.add("com-video");
       clearInterval(relogio);
+      cartaoTitulo.hidden = true; // sem a etiqueta "Tour em vídeo" (pedido de Gabriel, 27/10/2026)
+      legenda.textContent = [d.nome, d.area_m2 && d.area_m2 + " m²"].filter(Boolean).join(" · ");
       textosTopo();
       if (!semMovimento) video.play().catch(() => {});
       sincronizaPausa();
