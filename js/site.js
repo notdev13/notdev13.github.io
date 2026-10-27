@@ -52,6 +52,7 @@
     menuBtn.setAttribute("aria-label", menuMovel.hidden ? tr("nav.abrirMenu", "Abrir menu") : tr("nav.fecharMenu", "Fechar menu"));
     $("#aviso-lancamentos").hidden = true;
   });
+  menuBtn.setAttribute("aria-label", tr("nav.abrirMenu", "Abrir menu"));
 
   // No alto da página o menu fica sem fundo; depois que passa do botão do topo, esmaece
   const ctaTopo = $("#hero-cta");
@@ -149,7 +150,7 @@
     ligaVideo();
 
     // ----- Casa em destaque -----
-    $("#destaque-foto").innerHTML = foto(d.foto, "", { sizes: "(min-width: 821px) 64vw, 100vw" });
+    $("#destaque-foto").innerHTML = foto(d.foto, "", { sizes: "100vw" });
     $("#destaque-local").textContent = [d.bairro, d.cidade].filter(Boolean).join(" · ");
     function textosDestaque() {
       $("#destaque-foto img").alt = tr("dest.fachada", "Fachada:") + " " + nomeTraduzido(d.nome);
@@ -164,34 +165,32 @@
     }
     textosDestaque();
 
-    // ----- Grade de obras -----
-    const grade = $("#grade");
-    let filtroAtual = "todas";
-    function renderObras(filtro) {
-      filtroAtual = filtro;
-      const lista = obras.filter((o) => filtro === "todas" || o.tipo === filtro);
-      grade.innerHTML = lista.map((o) => {
+    // ----- Obras: as casas do Campeche em cartões grandes; os residenciais numa faixa compacta -----
+    function renderCasas() {
+      $("#grade").innerHTML = obras.filter((o) => o.tipo === "casas").map((o) => {
         const local = [o.bairro, o.cidade].filter(Boolean).join(" · ");
         const dadosObra = [o.area_m2 && o.area_m2 + " m²", o.suites && o.suites + " " + tr("obras.suites", "suítes"), o.situacao].filter(Boolean);
         const nome = nomeTraduzido(o.nome);
         return `<a class="card" href="#contato">
-          <div class="moldura">${foto(o.foto, nome)}${o.tipo === "casas" ? '<span class="selo">Campeche</span>' : ""}</div>
+          <div class="moldura">${foto(o.foto, nome, { sizes: "(min-width: 821px) 50vw, 100vw" })}</div>
           <span class="local">${local ? esc(local) : tr("obras.local", "Local") + " " + pendente()}</span>
           <h3>${esc(nome)}</h3>
           <span class="dados">${dadosObra.length ? dadosObra.map(esc).join(" · ") : tr("obras.areaTipo", "Área e tipologia") + " " + pendente()}</span>
         </a>`;
       }).join("");
-      $("#contagem").textContent = lista.length + " " + (lista.length === 1 ? tr("obras.obra", "obra") : tr("obras.obras", "obras"));
     }
-    $$(".chip").forEach((c) => (c.onclick = () => {
-      $$(".chip").forEach((x) => x.setAttribute("aria-pressed", String(x === c)));
-      renderObras(c.dataset.filtro);
-    }));
-    renderObras("todas");
+    renderCasas();
+    // Na faixa só foto e nome: os dados que a MB2 ainda não confirmou não aparecem
+    $("#faixa-residenciais").innerHTML = obras.filter((o) => o.tipo === "residenciais").map((o) => {
+      const local = [o.bairro, o.cidade].filter(Boolean).join(" · ");
+      return `<a class="card card-faixa" href="#contato">
+        <div class="moldura">${foto(o.foto, o.nome, { sizes: "(min-width: 821px) 22vw, 62vw" })}</div>
+        <h3>${esc(o.nome)}</h3>${local ? `<span class="local">${esc(local)}</span>` : ""}
+      </a>`;
+    }).join("");
 
     // ----- Fotos das outras seções -----
-    $("#historia-foto").innerHTML = `<img src="imagens/obras/07-aurora-garden-480.webp" srcset="imagens/obras/07-aurora-garden-480.webp 480w, imagens/obras/07-aurora-garden-1400.webp 1400w" sizes="100vw" alt="" loading="lazy">`;
-    $("#campeche-foto").innerHTML = foto("11-casa-jardim-campeche-288m2", "", { sizes: "(min-width: 821px) 50vw, 100vw" });
+    $("#campeche-foto").innerHTML = foto("11-casa-jardim-campeche-288m2", "", { sizes: "100vw" });
 
     // ----- Contato: dados que a MB2 confirmar aparecem; os vazios ficam marcados -----
     const zap = $("#zap-fixo"), zapTexto = $("#zap-texto");
@@ -220,7 +219,7 @@
     document.addEventListener("mb2:lang", () => {
       textosTopo();
       textosDestaque();
-      renderObras(filtroAtual);
+      renderCasas();
       textosContato();
     });
     if (empresa.instagram) {
