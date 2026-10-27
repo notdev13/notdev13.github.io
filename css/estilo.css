@@ -242,26 +242,9 @@ button { font: inherit; cursor: pointer; color: inherit; }
 .topo.aberto .menu-btn .ic-fechar { display: block; }
 
 /* Seletor de idioma (mesmo mecanismo do site da Dra. Grazi, ver js/i18n.js) */
-.lang { position: relative; margin-left: auto; }
-.lang-btn {
-  min-height: var(--toque);
-  padding: 0 12px;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  background: none;
-  color: inherit;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: var(--raio-pilula);
-  font-size: var(--t-12);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  transition: border-color 0.25s var(--suave), background 0.25s var(--suave);
-}
-.lang-btn:hover { border-color: var(--areia); background: rgba(255, 255, 255, 0.06); }
-.lang-btn svg { width: 15px; height: 15px; flex-shrink: 0; opacity: 0.85; }
-.lang-chev { width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg); margin-top: -3px; transition: transform 0.25s var(--suave); }
-.lang.open .lang-chev { transform: rotate(-135deg); margin-top: 2px; }
+.lang { position: relative; }
+/* Mesmo botão redondo do tema (lua/sol), só com o globo */
+.lang-btn { color: inherit; border-color: rgba(255, 255, 255, 0.5); }
 .lang-list {
   position: absolute;
   top: calc(100% + 10px);
@@ -286,7 +269,6 @@ button { font: inherit; cursor: pointer; color: inherit; }
 @media (max-width: 820px) {
   /* No celular o logo, o idioma, o tema e o menu dividem a mesma linha */
   .topo .wrap { gap: 10px; }
-  .tema-btn { margin-left: 0; }
 }
 
 /* Menu do celular: tela cheia em coluna */
@@ -360,7 +342,6 @@ button { font: inherit; cursor: pointer; color: inherit; }
   .fale-topo:hover { background: var(--acao-hover); }
   .menu-btn, .menu-movel { display: none; }
   .tema-btn { margin-left: 0; }
-  .lang { margin-left: 0; }
 }
 
 /* ---------- Topo (hero) ----------
