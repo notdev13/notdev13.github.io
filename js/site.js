@@ -60,7 +60,7 @@
     const obras = dados.obras, empresa = dados.empresa;
     const d = obras.find((o) => o.id === dados.destaque) || obras[0];
 
-    // ----- Topo: fotos que trocam (celular) ou vídeo (computador) -----
+    // ----- Topo: vídeo em todas as telas (fotos aparecem enquanto ele não carrega) -----
     const hero = $(".hero"), fotosWrap = $("#hero-fotos"), tracos = $("#hero-tracos"), legenda = $("#hero-legenda"), cartaoTitulo = $("#hero-cartao-titulo");
     fotosWrap.innerHTML = dados.topo.map((t, i) =>
       `<img class="hero-foto${i === 0 ? " ativa" : ""}" src="imagens/obras/${t.foto}-480.webp" srcset="imagens/obras/${t.foto}-480.webp 480w, imagens/obras/${t.foto}-1400.webp 1400w" sizes="100vw" alt="" ${i === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}>`
@@ -92,31 +92,23 @@
     hero.addEventListener("touchend", (e) => {
       if (x0 === null) return;
       const dx = e.changedTouches[0].clientX - x0; x0 = null;
-      if (Math.abs(dx) > 50) irPara(atual + (dx < 0 ? 1 : -1), true);
+      if (Math.abs(dx) > 50 && !hero.classList.contains("com-video")) irPara(atual + (dx < 0 ? 1 : -1), true);
     }, { passive: true });
 
-    // Vídeo só no computador; no celular ele nem é baixado
+    // Vídeo em todas as telas: computador recebe a versão de máxima qualidade (12 MB),
+    // celular a de 720p (6 MB); conexão lenta ou economia de dados recebe a 480p (3 MB)
     const video = $("#hero-video"), pausa = $("#hero-pausa");
     function sincronizaPausa() {
       const parado = video.paused;
       pausa.setAttribute("aria-pressed", String(parado));
       pausa.setAttribute("aria-label", parado ? "Continuar vídeo" : "Pausar vídeo");
     }
-    function decideVideo() {
-      if (!computador.matches) {
-        if (hero.classList.contains("com-video")) { video.pause(); hero.classList.remove("com-video"); cartaoTitulo.textContent = "Nossas casas"; irPara(0); reiniciar(); }
-        return;
-      }
-      if (!video.src) {
-        // Máquina fraca ou conexão lenta recebe a versão 480p (3 MB); as demais, 720p (6 MB)
-        const rede = navigator.connection || {};
-        const leve = rede.saveData || /(^|\b)(slow-2g|2g|3g)\b/.test(rede.effectiveType || "") ||
-          (navigator.deviceMemory && navigator.deviceMemory <= 2) ||
-          (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) ||
-          window.innerWidth < 1100;
-        video.poster = "video/poster-1400.jpg";
-        video.src = leve ? "video/hero-mb2-480.mp4" : "video/hero-mb2.mp4";
-      }
+    function ligaVideo() {
+      const rede = navigator.connection || {};
+      const lenta = rede.saveData || /(^|\b)(slow-2g|2g)\b/.test(rede.effectiveType || "");
+      const grande = computador.matches;
+      video.poster = grande ? "video/poster-1400.jpg" : "video/poster-480.jpg";
+      video.src = lenta ? "video/hero-mb2-480.mp4" : grande ? "video/hero-mb2-hd.mp4" : "video/hero-mb2.mp4";
       hero.classList.add("com-video");
       clearInterval(relogio);
       cartaoTitulo.textContent = "Tour em vídeo";
@@ -127,8 +119,7 @@
     video.addEventListener("play", sincronizaPausa);
     video.addEventListener("pause", sincronizaPausa);
     pausa.onclick = () => (video.paused ? video.play().catch(() => {}) : video.pause());
-    (computador.addEventListener ? computador.addEventListener("change", decideVideo) : computador.addListener(decideVideo));
-    decideVideo();
+    ligaVideo();
 
     // ----- Casa em destaque -----
     $("#destaque-foto").innerHTML = foto(d.foto, "Fachada: " + d.nome, { sizes: "(min-width: 821px) 64vw, 100vw" });
