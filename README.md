@@ -34,5 +34,9 @@ o que não funciona abrindo o arquivo direto.
   `dados/obras.json`.
 - Telefone, WhatsApp, e-mail, endereço e CNPJ: preencha em `empresa` no JSON.
   Com o WhatsApp preenchido, o botão fixo do celular abre a conversa.
+- Mudou `css/estilo.css` ou algum arquivo de `js/`: troque o `?v=` desses arquivos
+  no `index.html` (por exemplo, para a data do dia). O GitHub Pages deixa o
+  navegador guardar CSS e JS por 10 minutos; sem trocar o `?v=`, quem já tinha
+  visitado pode ver a página nova com o estilo antigo.
 
 O painel de gestão de obras fica em outro repositório (`MB2`).
