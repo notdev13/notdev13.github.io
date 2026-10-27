@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>MB2 Incorporações</title>
-<meta name="description" content="MB2 Incorporações: 14 anos construindo. Casas de alto padrão no Campeche, Sul da Ilha, Florianópolis.">
+<title data-i18n="meta.titulo">MB2 Incorporações</title>
+<meta name="description" data-i18n-attr="content:meta.desc" content="MB2 Incorporações: 14 anos construindo. Casas de alto padrão no Campeche, Sul da Ilha, Florianópolis.">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,50 +33,62 @@
 
 <header class="topo">
   <div class="wrap">
-    <a class="logo" href="#inicio" aria-label="MB2 Incorporações, início"><svg viewBox="0 0 520 150" aria-hidden="true"><use href="#logo-mb2"/></svg></a>
-    <nav class="nav" aria-label="Principal">
-      <a href="#obras">Obras</a>
-      <a href="#como-construimos">Como construímos</a>
-      <a href="#campeche">Campeche</a>
-      <a href="#contato">Contato</a>
+    <a class="logo" href="#inicio" aria-label="MB2 Incorporações, início" data-i18n-attr="aria-label:nav.logo"><svg viewBox="0 0 520 150" aria-hidden="true"><use href="#logo-mb2"/></svg></a>
+    <nav class="nav" aria-label="Principal" data-i18n-attr="aria-label:nav.principal">
+      <a href="#obras" data-i18n="nav.obras">Obras</a>
+      <a href="#como-construimos" data-i18n="nav.como">Como construímos</a>
+      <a href="#campeche" data-i18n="nav.campeche">Campeche</a>
+      <a href="#contato" data-i18n="nav.contato">Contato</a>
     </nav>
-    <a class="fale-topo link-zap" href="#contato">Fale com a MB2</a>
+    <a class="fale-topo link-zap" href="#contato" data-i18n="nav.fale">Fale com a MB2</a>
     <button class="redondo tema-btn" id="tema-btn" type="button" aria-pressed="false" aria-label="Ativar tema escuro">
       <svg class="ic-lua" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
       <svg class="ic-sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
     </button>
+    <div class="lang notranslate" id="lang">
+      <button class="redondo lang-btn" id="langBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Escolher idioma" data-i18n-attr="aria-label:nav.idioma">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg>
+        <span class="sr-only" id="langCur">PT</span>
+      </button>
+      <ul class="lang-list" id="langList" role="listbox">
+        <li data-lang="pt" role="option">Português</li>
+        <li data-lang="en" role="option">English</li>
+        <li data-lang="es" role="option">Español</li>
+        <li data-lang="fr" role="option">Français</li>
+      </ul>
+    </div>
     <button class="redondo menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu-movel" aria-label="Abrir menu">
       <svg class="ic-abrir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       <svg class="ic-fechar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
   </div>
 </header>
-<nav class="menu-movel" id="menu-movel" aria-label="Menu do celular" hidden>
-  <a href="#obras">Obras</a>
-  <a href="#como-construimos">Como construímos</a>
-  <a href="#campeche">Viver no Campeche</a>
-  <a href="#contato">Contato</a>
-  <a class="btn btn-verde link-zap" href="#contato">Fale com a MB2</a>
+<nav class="menu-movel" id="menu-movel" aria-label="Menu do celular" data-i18n-attr="aria-label:nav.menuMovel" hidden>
+  <a href="#obras" data-i18n="nav.obras">Obras</a>
+  <a href="#como-construimos" data-i18n="nav.como">Como construímos</a>
+  <a href="#campeche" data-i18n="nav.campecheLongo">Viver no Campeche</a>
+  <a href="#contato" data-i18n="nav.contato">Contato</a>
+  <a class="btn btn-verde link-zap" href="#contato" data-i18n="nav.fale">Fale com a MB2</a>
 </nav>
 
 <main id="inicio">
-  <h1 class="sr-only">MB2 Incorporações · Casas de alto padrão no Sul da Ilha, Florianópolis</h1>
+  <h1 class="sr-only" data-i18n="h1">MB2 Incorporações · Casas de alto padrão no Sul da Ilha, Florianópolis</h1>
 
-  <section class="hero" aria-label="Apresentação">
+  <section class="hero" aria-label="Apresentação" data-i18n-attr="aria-label:hero.aria">
     <div id="hero-fotos"></div>
     <video class="hero-video" id="hero-video" muted loop playsinline preload="none" aria-hidden="true"></video>
     <div class="wrap hero-conteudo">
-      <h2>14 anos construindo. <em>Hoje, no Sul da Ilha.</em></h2>
-      <a class="btn btn-claro" id="hero-cta" href="#obras">Ver nossas obras</a>
+      <h2 data-i18n="hero.titulo">14 anos construindo. <em>Hoje, no Sul da Ilha.</em></h2>
+      <a class="btn btn-claro" id="hero-cta" href="#obras" data-i18n="hero.cta">Ver nossas obras</a>
     </div>
     <div class="wrap hero-base">
       <div class="hero-controles">
-        <button class="redondo so-fotos" id="hero-prev" type="button" aria-label="Foto anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <button class="redondo so-fotos" id="hero-prev" type="button" aria-label="Foto anterior" data-i18n-attr="aria-label:hero.fotoAnt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 6l-6 6 6 6"/></svg></button>
         <div class="tracos" id="hero-tracos"></div>
-        <button class="redondo so-fotos" id="hero-next" type="button" aria-label="Próxima foto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
-        <button class="redondo hero-pausa" id="hero-pausa" type="button" aria-label="Pausar vídeo" aria-pressed="false"><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="6" width="3" height="12"/><rect x="14" y="6" width="3" height="12"/></svg><svg class="ic-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+        <button class="redondo so-fotos" id="hero-next" type="button" aria-label="Próxima foto" data-i18n-attr="aria-label:hero.fotoProx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+        <button class="redondo hero-pausa" id="hero-pausa" type="button" aria-label="Pausar vídeo" data-i18n-attr="aria-label:hero.pausar" aria-pressed="false"><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="6" width="3" height="12"/><rect x="14" y="6" width="3" height="12"/></svg><svg class="ic-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
       </div>
-      <a class="hero-rolar" href="#destaque"><span>Role para ver</span><i aria-hidden="true"></i></a>
+      <a class="hero-rolar" href="#destaque"><span data-i18n="hero.rolar">Role para ver</span><i aria-hidden="true"></i></a>
       <div class="hero-cartao">
         <span class="chapeu" id="hero-cartao-titulo">Nossas casas</span>
         <small id="hero-legenda"></small>
@@ -86,53 +98,53 @@
 
   <section class="secao wrap" id="obras">
     <header class="cabecalho obras-cabecalho">
-      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Empreendimentos</span>
-      <h2 class="titulo">Casas no <em>Campeche.</em></h2>
+      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="obras.chapeu">Empreendimentos</span></span>
+      <h2 class="titulo" data-i18n="obras.titulo">Casas no <em>Campeche.</em></h2>
     </header>
     <div class="grade grade-casas" id="grade"></div>
     <header class="cabecalho portfolio-cabecalho" id="portfolio">
-      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Portfólio</span>
-      <h2 class="titulo">Residenciais em <em>Curitiba e Itapoá.</em></h2>
-      <p class="portfolio-dica" aria-hidden="true">Arraste para ver</p>
+      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="port.chapeu">Portfólio</span></span>
+      <h2 class="titulo" data-i18n="port.titulo">Residenciais em <em>Curitiba e Itapoá.</em></h2>
+      <p class="portfolio-dica" aria-hidden="true" data-i18n="port.dica">Arraste para ver</p>
     </header>
-    <div class="faixa" id="faixa-residenciais" aria-label="Residenciais entregues"></div>
+    <div class="faixa" id="faixa-residenciais" aria-label="Residenciais entregues" data-i18n-attr="aria-label:port.aria"></div>
   </section>
 
   <section class="secao como" id="como-construimos">
     <div class="wrap">
     <header class="cabecalho">
-      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Do terreno à chave</span>
-      <h2 class="titulo">Como <em>construímos.</em></h2>
+      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="como.chapeu">Do terreno à chave</span></span>
+      <h2 class="titulo" data-i18n="como.titulo">Como <em>construímos.</em></h2>
     </header>
     <ol class="etapas">
-      <li class="etapa"><span class="numero"><svg aria-hidden="true"><use href="#hx-o"/></svg><b>1</b></span><div class="texto"><h3>Terreno e projeto</h3><p>Escolhemos o lote e desenhamos a casa a partir dele: posição do sol, ventilação e o jeito de viver do Sul da Ilha.</p></div></li>
-      <li class="etapa"><span class="numero"><svg aria-hidden="true"><use href="#hx-o"/></svg><b>2</b></span><div class="texto"><h3>Aprovações</h3><p>Cuidamos da documentação e das licenças antes de abrir a obra.</p></div></li>
-      <li class="etapa"><span class="numero"><svg aria-hidden="true"><use href="#hx-o"/></svg><b>3</b></span><div class="texto"><h3>Obra</h3><p>Acompanhamos cada etapa de perto, da fundação ao acabamento, com materiais escolhidos para o clima da Ilha.</p></div></li>
-      <li class="etapa"><span class="numero"><svg aria-hidden="true"><use href="#hx-o"/></svg><b>4</b></span><div class="texto"><h3>Entrega</h3><p>Você recebe a casa pronta para morar e continua falando com a mesma equipe que construiu.</p></div></li>
+      <li class="etapa"><span class="numero"><svg aria-hidden="true"><use href="#hx-o"/></svg><b>1</b></span><div class="texto"><h3 data-i18n="como.1t">Terreno e projeto</h3><p data-i18n="como.1d">Escolhemos o lote e desenhamos a casa a partir dele: posição do sol, ventilação e o jeito de viver do Sul da Ilha.</p></div></li>
+      <li class="etapa"><span class="numero"><svg aria-hidden="true"><use href="#hx-o"/></svg><b>2</b></span><div class="texto"><h3 data-i18n="como.2t">Aprovações</h3><p data-i18n="como.2d">Cuidamos da documentação e das licenças antes de abrir a obra.</p></div></li>
+      <li class="etapa"><span class="numero"><svg aria-hidden="true"><use href="#hx-o"/></svg><b>3</b></span><div class="texto"><h3 data-i18n="como.3t">Obra</h3><p data-i18n="como.3d">Acompanhamos cada etapa de perto, da fundação ao acabamento, com materiais escolhidos para o clima da Ilha.</p></div></li>
+      <li class="etapa"><span class="numero"><svg aria-hidden="true"><use href="#hx-o"/></svg><b>4</b></span><div class="texto"><h3 data-i18n="como.4t">Entrega</h3><p data-i18n="como.4d">Você recebe a casa pronta para morar e continua falando com a mesma equipe que construiu.</p></div></li>
     </ol>
     </div>
   </section>
 
-  <section class="destaque" id="destaque" aria-label="Casa em destaque">
+  <section class="destaque" id="destaque" aria-label="Casa em destaque" data-i18n-attr="aria-label:dest.aria">
     <div class="destaque-foto" id="destaque-foto"></div>
     <div class="wrap destaque-conteudo">
-      <span class="chapeu">Casa em destaque</span>
+      <span class="chapeu" data-i18n="dest.chapeu">Casa em destaque</span>
       <span class="destaque-local" id="destaque-local"></span>
       <h3 id="destaque-nome"></h3>
       <div class="etiquetas" id="destaque-etiquetas"></div>
-      <a class="btn btn-claro link-zap" href="#contato">Quero ver esta casa</a>
+      <a class="btn btn-claro link-zap" href="#contato" data-i18n="dest.cta">Quero ver esta casa</a>
     </div>
   </section>
 
-  <section class="secao historia" id="sobre" aria-label="Sobre a MB2">
+  <section class="secao historia" id="sobre" aria-label="Sobre a MB2" data-i18n-attr="aria-label:hist.aria">
     <div class="wrap historia-texto">
-      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Construtora há 14 anos</span>
-      <h2>Começamos em Curitiba. <em class="italico">Escolhemos o Campeche para continuar.</em></h2>
-      <p>Viemos para Florianópolis porque o jeito de viver da Ilha e o mercado daqui combinam com as casas que fazemos.</p>
+      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="hist.chapeu">Construtora há 14 anos</span></span>
+      <h2 data-i18n="hist.titulo">Começamos em Curitiba. <em class="italico">Escolhemos o Campeche para continuar.</em></h2>
+      <p data-i18n="hist.p">Viemos para Florianópolis porque o jeito de viver da Ilha e o mercado daqui combinam com as casas que fazemos.</p>
       <dl class="numeros">
-        <div><dt>14</dt><dd>anos construindo</dd></div>
-        <div><dt>12</dt><dd>empreendimentos</dd></div>
-        <div><dt>3</dt><dd>cidades</dd></div>
+        <div><dt>14</dt><dd data-i18n="num.anos">anos construindo</dd></div>
+        <div><dt>12</dt><dd data-i18n="num.emp">empreendimentos</dd></div>
+        <div><dt>3</dt><dd data-i18n="num.cidades">cidades</dd></div>
       </dl>
     </div>
   </section>
@@ -141,14 +153,14 @@
     <div class="campeche-foto" id="campeche-foto"></div>
     <div class="wrap">
       <div class="campeche-texto">
-        <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Onde construímos</span>
-        <h2 class="titulo">Viver no <em>Campeche.</em></h2>
-        <p>O Campeche fica no Sul da Ilha, em Florianópolis. É um bairro de casas, perto do mar, com rotina tranquila e tudo o que o dia a dia pede.</p>
+        <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="camp.chapeu">Onde construímos</span></span>
+        <h2 class="titulo" data-i18n="camp.titulo">Viver no <em>Campeche.</em></h2>
+        <p data-i18n="camp.p">O Campeche fica no Sul da Ilha, em Florianópolis. É um bairro de casas, perto do mar, com rotina tranquila e tudo o que o dia a dia pede.</p>
         <ul class="lista-bairro">
-          <li><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Praia de mar aberto, boa para caminhar e surfar</li>
-          <li><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>A Ilha do Campeche bem em frente à praia</li>
-          <li><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Comércio, escolas e restaurantes no próprio bairro</li>
-          <li><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Caminho curto até o aeroporto da cidade</li>
+          <li><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="camp.l1">Praia de mar aberto, boa para caminhar e surfar</span></li>
+          <li><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="camp.l2">A Ilha do Campeche bem em frente à praia</span></li>
+          <li><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="camp.l3">Comércio, escolas e restaurantes no próprio bairro</span></li>
+          <li><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="camp.l4">Caminho curto até o aeroporto da cidade</span></li>
         </ul>
       </div>
     </div>
@@ -157,92 +169,94 @@
   <!-- Seção oculta por enquanto (pedido de Gabriel, 27/10/2026). Para voltar: tirar "hidden" e devolver id="contato" aqui (e tirar do rodapé). -->
   <section class="secao contato" id="contato-secao" hidden>
     <div class="wrap">
-      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Fale com quem constrói</span>
-      <h2>Quer conhecer uma casa da MB2? <em class="italico">A gente mostra a obra de perto.</em></h2>
+      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="cont.chapeu">Fale com quem constrói</span></span>
+      <h2 data-i18n="cont.titulo">Quer conhecer uma casa da MB2? <em class="italico">A gente mostra a obra de perto.</em></h2>
       <ul class="canais">
-        <li><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M4 5h16v11H8l-4 4z"/></svg></span><div><h3>Conversa direta</h3><p>Sem intermediário. Quem responde suas dúvidas sobre projeto, obra e condições é a equipe da MB2.</p></div></li>
-        <li><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M4 4h10l6 6v10H4z"/><path d="M14 4v6h6"/></svg></span><div><h3>Plantas e condições</h3><p>Mandamos plantas, imagens e as condições da casa que chamou sua atenção.</p></div></li>
-        <li><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><rect x="4" y="5" width="16" height="15" rx="1"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></span><div><h3>Visita à obra</h3><p>Marque um horário para ver a obra ou a casa pronta no Campeche.</p></div></li>
+        <li><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M4 5h16v11H8l-4 4z"/></svg></span><div><h3 data-i18n="cont.1t">Conversa direta</h3><p data-i18n="cont.1d">Sem intermediário. Quem responde suas dúvidas sobre projeto, obra e condições é a equipe da MB2.</p></div></li>
+        <li><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><path d="M4 4h10l6 6v10H4z"/><path d="M14 4v6h6"/></svg></span><div><h3 data-i18n="cont.2t">Plantas e condições</h3><p data-i18n="cont.2d">Mandamos plantas, imagens e as condições da casa que chamou sua atenção.</p></div></li>
+        <li><span class="icone"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.4"><rect x="4" y="5" width="16" height="15" rx="1"/><path d="M4 10h16M9 3v4M15 3v4"/></svg></span><div><h3 data-i18n="cont.3t">Visita à obra</h3><p data-i18n="cont.3d">Marque um horário para ver a obra ou a casa pronta no Campeche.</p></div></li>
       </ul>
       <p class="contato-dados" id="dados-contato"></p>
       <div class="contato-botoes">
-        <a class="btn btn-verde link-zap" href="#contato">Chamar a MB2</a>
-        <a class="btn btn-claro" href="#contato">Agendar visita</a>
+        <a class="btn btn-verde link-zap" href="#contato" data-i18n="cont.chamar">Chamar a MB2</a>
+        <a class="btn btn-claro" href="#contato" data-i18n="cont.agendar">Agendar visita</a>
       </div>
     </div>
   </section>
 
-  <section class="secao chamada" aria-label="Fale com a MB2">
+  <section class="secao chamada" aria-label="Fale com a MB2" data-i18n-attr="aria-label:nav.fale">
     <div class="wrap">
-      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Fale com quem constrói</span>
-      <h2 class="titulo">Quer conhecer uma casa <em>da MB2?</em></h2>
-      <p>A gente mostra a obra de perto, manda plantas e condições, e quem responde é a equipe que constrói.</p>
+      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="cont.chapeu">Fale com quem constrói</span></span>
+      <h2 class="titulo" data-i18n="cham.titulo">Quer conhecer uma casa <em>da MB2?</em></h2>
+      <p data-i18n="cham.p">A gente mostra a obra de perto, manda plantas e condições, e quem responde é a equipe que constrói.</p>
       <div class="chamada-botoes">
-        <a class="btn btn-escuro link-zap" href="#contato">Fale com a MB2</a>
-        <a class="btn btn-contorno" href="#obras">Ver as casas</a>
+        <a class="btn btn-escuro link-zap" href="#contato" data-i18n="nav.fale">Fale com a MB2</a>
+        <a class="btn btn-contorno" href="#obras" data-i18n="cham.casas">Ver as casas</a>
       </div>
     </div>
   </section>
 </main>
 
-<a class="zap-fixo link-zap" id="zap-fixo" href="#contato"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v11H8l-4 4z"/></svg><span id="zap-texto">Falar com a MB2</span></a>
+<a class="zap-fixo link-zap" id="zap-fixo" href="#contato"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v11H8l-4 4z"/></svg><span id="zap-texto" data-i18n="zap.texto">Falar com a MB2</span></a>
 
 <footer class="rodape" id="contato">
   <div class="wrap rodape-topo">
-    <a class="logo" href="#inicio" aria-label="MB2 Incorporações"><svg viewBox="0 0 520 150" aria-hidden="true"><use href="#logo-mb2"/></svg></a>
-    <div class="sociais" aria-label="Redes sociais">
-      <a id="instagram" href="#" aria-label="Instagram da MB2" target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17" cy="7" r=".6" fill="currentColor"/></svg></a>
-      <span title="Facebook: a confirmar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></span>
-      <span title="YouTube: a confirmar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg></span>
+    <a class="logo" href="#inicio" aria-label="MB2 Incorporações" data-i18n-attr="aria-label:rod.logo"><svg viewBox="0 0 520 150" aria-hidden="true"><use href="#logo-mb2"/></svg></a>
+    <div class="sociais" aria-label="Redes sociais" data-i18n-attr="aria-label:rod.sociais">
+      <a id="instagram" href="#" aria-label="Instagram da MB2" data-i18n-attr="aria-label:rod.instagram" target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17" cy="7" r=".6" fill="currentColor"/></svg></a>
+      <span title="Facebook: a confirmar" data-i18n-attr="title:rod.facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></span>
+      <span title="YouTube: a confirmar" data-i18n-attr="title:rod.youtube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg></span>
     </div>
   </div>
-    <div class="lancamentos" aria-label="Lançamentos">
+    <div class="lancamentos" aria-label="Lançamentos" data-i18n-attr="aria-label:lanc.aria">
       <div class="wrap">
         <div>
-          <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg>Lançamentos</span>
-          <h2>Saiba antes das <em class="italico">próximas casas da MB2.</em></h2>
+          <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="lanc.chapeu">Lançamentos</span></span>
+          <h2 data-i18n="lanc.titulo">Saiba antes das <em class="italico">próximas casas da MB2.</em></h2>
         </div>
         <form id="form-lancamentos" novalidate>
-          <label class="sr-only" for="email">Seu e-mail</label>
+          <label class="sr-only" for="email" data-i18n="lanc.email">Seu e-mail</label>
           <div class="campo">
-            <input id="email" type="email" placeholder="Seu e-mail" autocomplete="email">
-            <button type="submit">Inscrever</button>
+            <input id="email" type="email" placeholder="Seu e-mail" data-i18n-attr="placeholder:lanc.email" autocomplete="email">
+            <button type="submit" data-i18n="lanc.inscrever">Inscrever</button>
           </div>
-          <label class="consentimento"><input id="consentimento" type="checkbox"> Ao se cadastrar você concorda com a nossa política de privacidade.</label>
+          <label class="consentimento"><input id="consentimento" type="checkbox"> <span data-i18n="lanc.consent">Ao se cadastrar você concorda com a nossa política de privacidade.</span></label>
           <p class="aviso" id="aviso-lancamentos" hidden></p>
         </form>
       </div>
     </div>
   <div class="wrap rodape-colunas">
     <div>
-      <h4>Empreendimentos</h4>
+      <h4 data-i18n="rod.emp">Empreendimentos</h4>
       <ul>
-        <li><a href="#obras">Casas no Campeche</a></li>
-        <li><a href="#portfolio">Residenciais</a></li>
+        <li><a href="#obras" data-i18n="rod.casas">Casas no Campeche</a></li>
+        <li><a href="#portfolio" data-i18n="rod.resid">Residenciais</a></li>
               </ul>
     </div>
     <div>
-      <h4>Institucional</h4>
+      <h4 data-i18n="rod.inst">Institucional</h4>
       <ul>
-        <li><a href="#sobre">Sobre a MB2</a></li>
-        <li><a href="#como-construimos">Como construímos</a></li>
-        <li><a href="#campeche">Viver no Campeche</a></li>
-        <li>Política de privacidade <span class="pendente">a confirmar</span></li>
+        <li><a href="#sobre" data-i18n="rod.sobre">Sobre a MB2</a></li>
+        <li><a href="#como-construimos" data-i18n="rod.como">Como construímos</a></li>
+        <li><a href="#campeche" data-i18n="rod.campeche">Viver no Campeche</a></li>
+        <li><span data-i18n="rod.privacidade">Política de privacidade</span> <span class="pendente" data-i18n="pendente">a confirmar</span></li>
       </ul>
     </div>
     <div>
-      <h4>Contato</h4>
+      <h4 data-i18n="rod.contato">Contato</h4>
       <ul id="rodape-contato"></ul>
     </div>
   </div>
   <div class="rodape-base">
     <div class="wrap">
       <span>© 2026 MB2 Incorporações · mb2incorporacoes.com.br</span>
-      <span>Construtora · Campeche, Florianópolis · SC</span>
+      <span data-i18n="rod.base">Construtora · Campeche, Florianópolis · SC</span>
     </div>
   </div>
 </footer>
 
+<!-- Tradução: sem defer e antes do site.js (ver js/i18n.js) -->
+<script src="js/i18n.js"></script>
 <script src="js/site.js"></script>
 </body>
 </html>
