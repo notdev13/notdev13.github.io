@@ -548,18 +548,21 @@
     var caixa = document.getElementById('lang');
     if (!caixa) return;
     var btn = document.getElementById('langBtn');
+    var lista = document.getElementById('langList');
+    // A lista começa com "hidden" no HTML: fica fechada mesmo se o CSS não carregar
+    function abrir(sim) {
+      caixa.classList.toggle('open', sim);
+      lista.hidden = !sim;
+      btn.setAttribute('aria-expanded', sim ? 'true' : 'false');
+    }
 
     btn.addEventListener('click', function (e) {
       e.stopPropagation();
-      var aberto = caixa.classList.toggle('open');
-      btn.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+      abrir(!caixa.classList.contains('open'));
     });
-    document.addEventListener('click', function () {
-      caixa.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-    });
+    document.addEventListener('click', function () { abrir(false); });
     caixa.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') { caixa.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); btn.focus(); }
+      if (e.key === 'Escape') { abrir(false); btn.focus(); }
     });
 
     document.querySelectorAll('#langList li').forEach(function (li) {
@@ -567,8 +570,7 @@
       var troca = function () {
         // Troca instantânea, sem recarregar a página (o Google Tradutor recarregava).
         aplicar(li.getAttribute('data-lang'));
-        caixa.classList.remove('open');
-        btn.setAttribute('aria-expanded', 'false');
+        abrir(false);
       };
       li.addEventListener('click', troca);
       li.addEventListener('keydown', function (e) {
