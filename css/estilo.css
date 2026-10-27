@@ -1,5 +1,5 @@
 /* Site institucional da MB2 · CSS escrito primeiro para o celular e ampliado para o computador.
-   Layout: menu fixo de vidro, topo com fotos (celular) ou vídeo (computador), casa em destaque,
+   Layout: menu fixo de vidro, topo com vídeo (fotos só se o vídeo não carregar), obras, casa em destaque,
    grade de obras, faixa da história, etapas da obra, bairro, contato, lançamentos e rodapé. */
 
 /* ---------- Tokens ---------- */
@@ -315,8 +315,8 @@ button { font: inherit; cursor: pointer; color: inherit; }
 }
 
 /* ---------- Topo (hero) ----------
-   Tela cheia: só o símbolo, o título e um botão. O vídeo (computador) ou as fotos (celular)
-   entram com um zoom lento; o conteúdo aparece em sequência. */
+   Tela cheia: só o símbolo, o título e um botão. O vídeo (ou as fotos, enquanto ele não carrega)
+   entra com um zoom lento; o conteúdo aparece em sequência. */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -443,9 +443,9 @@ button { font: inherit; cursor: pointer; color: inherit; }
   .hero-controles { justify-self: start; }
   .hero-rolar { display: flex; }
   .hero-cartao { justify-self: end; min-width: 260px; }
-  .hero.com-video .hero-video { display: block; }
-  .hero.com-video .hero-foto, .hero.com-video .tracos, .hero.com-video .so-fotos { display: none; }
 }
+.hero.com-video .hero-video { display: block; }
+.hero.com-video .hero-foto, .hero.com-video .tracos, .hero.com-video .so-fotos { display: none; }
 .hero-pausa { display: none; margin-left: auto; }
 .hero-pausa .ic-play, .hero-pausa[aria-pressed="true"] .ic-pause { display: none; }
 .hero-pausa[aria-pressed="true"] .ic-play { display: block; }
