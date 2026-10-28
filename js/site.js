@@ -91,22 +91,6 @@
     textosTopo();
     ligaVideo();
 
-    // ----- Casa em destaque -----
-    $("#destaque-foto").innerHTML = foto(d.foto, "", { sizes: "100vw" });
-    $("#destaque-local").textContent = [d.bairro, d.cidade].filter(Boolean).join(" · ");
-    function textosDestaque() {
-      $("#destaque-foto img").alt = tr("dest.fachada", "Fachada:") + " " + nomeTraduzido(d.nome);
-      $("#destaque-nome").textContent = nomeTraduzido(d.nome);
-      const etiquetas = [];
-      if (d.area_m2) etiquetas.push(d.area_m2 + " m²");
-      if (d.suites) etiquetas.push(d.suites + " " + tr("obras.suites", "suítes"));
-      if (d.vagas) etiquetas.push(d.vagas + " " + tr("obras.vagas", "vagas"));
-      if (d.bairro) etiquetas.push(d.bairro);
-      if (d.vendida) etiquetas.push(tr("obras.vendida", "Vendida"));
-      $("#destaque-etiquetas").innerHTML = etiquetas.map((e) => `<span>${esc(e)}</span>`).join("");
-    }
-    textosDestaque();
-
     // ----- Em construção agora: um cartão por canteiro, cada um com a própria página -----
     function renderCanteiros() {
       const canteiros = obras.filter((o) => o.tipo === "canteiro" && o.situacao === "em-construcao");
@@ -168,7 +152,6 @@
 
     document.addEventListener("mb2:lang", () => {
       textosTopo();
-      textosDestaque();
       renderCanteiros();
       renderCasas();
       textosCampeche();

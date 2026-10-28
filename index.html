@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Archivo:wdth,wght@87.5,900&family=IBM+Plex+Sans:wght@500&display=swap">
 <!-- ?v= muda a cada publicação: o GitHub Pages deixa o navegador guardar CSS e JS por 10 min,
      e sem isso a página nova pode abrir com o estilo antigo -->
-<link rel="stylesheet" href="css/estilo.css?v=2026-10-28b">
+<link rel="stylesheet" href="css/estilo.css?v=2026-10-28c">
 <script>
   // Aplica a escolha guardada antes de desenhar a página; sem escolha, segue o aparelho
   // Sem escolha guardada, o site abre no tema escuro (o botão do menu continua trocando)
@@ -100,7 +100,7 @@
         <button class="redondo hero-pausa" id="hero-pausa" type="button" aria-label="Pausar vídeo" data-i18n-attr="aria-label:hero.pausar" aria-pressed="false"><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="6" width="3" height="12"/><rect x="14" y="6" width="3" height="12"/></svg><svg class="ic-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
       </div>
       <a class="hero-rolar" href="#obras"><span data-i18n="hero.rolar">Role para ver</span><i aria-hidden="true"></i></a>
-      <div class="hero-cartao">
+      <div class="hero-cartao" hidden>
         <span class="chapeu" id="hero-cartao-titulo">Nossas casas</span>
         <small id="hero-legenda"></small>
       </div>
@@ -110,7 +110,7 @@
   <section class="secao wrap" id="obras">
     <header class="cabecalho obras-cabecalho">
       <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="obras.chapeu">Em construção agora</span></span>
-      <h2 class="titulo" data-i18n="obras.titulo">Canteiros abertos no <em>Sul da Ilha.</em></h2>
+      <h2 class="titulo" data-i18n="obras.titulo">Obras em progresso no <em>Sul da Ilha.</em></h2>
       <p class="obras-texto" data-i18n="obras.texto">Cada obra tem a própria página, com a etapa atual e as atualizações da semana. É a mesma página que fica na placa da obra.</p>
     </header>
     <div class="grade grade-canteiros" id="grade-canteiros"></div>
@@ -119,12 +119,6 @@
       <h2 class="titulo" data-i18n="entr.titulo">Casas prontas no <em>Campeche.</em></h2>
     </header>
     <div class="grade grade-casas" id="grade"></div>
-    <header class="cabecalho portfolio-cabecalho" id="portfolio">
-      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="port.chapeu">Portfólio</span></span>
-      <h2 class="titulo" data-i18n="port.titulo">Residenciais em <em>Curitiba e Itapoá.</em></h2>
-      <p class="portfolio-dica" aria-hidden="true" data-i18n="port.dica">Arraste para ver</p>
-    </header>
-    <div class="faixa" id="faixa-residenciais" aria-label="Residenciais entregues" data-i18n-attr="aria-label:port.aria"></div>
   </section>
 
   <section class="secao como" id="como-construimos">
@@ -150,16 +144,16 @@
     </div>
   </section>
 
-  <section class="destaque" id="destaque" aria-label="Casa em destaque" data-i18n-attr="aria-label:dest.aria">
-    <div class="destaque-foto" id="destaque-foto"></div>
-    <div class="wrap destaque-conteudo">
-      <span class="chapeu" data-i18n="dest.chapeu">Casa em destaque</span>
-      <span class="destaque-local" id="destaque-local"></span>
-      <h3 id="destaque-nome"></h3>
-      <div class="etiquetas" id="destaque-etiquetas"></div>
-      <a class="btn btn-claro link-zap" href="#contato" data-i18n="dest.cta">Quero ver esta casa</a>
-    </div>
+  <section class="secao wrap portfolio-secao">
+    <header class="cabecalho portfolio-cabecalho" id="portfolio">
+      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="port.chapeu">Portfólio</span></span>
+      <h2 class="titulo" data-i18n="port.titulo">Residenciais em <em>Curitiba e Itapoá.</em></h2>
+      <p class="portfolio-dica" aria-hidden="true" data-i18n="port.dica">Arraste para ver</p>
+    </header>
+    <div class="faixa" id="faixa-residenciais" aria-label="Residenciais entregues" data-i18n-attr="aria-label:port.aria"></div>
   </section>
+
+
 
   <section class="secao historia" id="sobre" aria-label="Sobre a MB2" data-i18n-attr="aria-label:hist.aria">
     <div class="wrap historia-texto">
@@ -284,8 +278,8 @@
 </footer>
 
 <!-- Tradução: sem defer e antes do site.js (ver js/i18n.js) -->
-<script src="js/i18n.js?v=2026-10-28b"></script>
-<script src="js/base.js?v=2026-10-28b"></script>
-<script src="js/site.js?v=2026-10-28b"></script>
+<script src="js/i18n.js?v=2026-10-28c"></script>
+<script src="js/base.js?v=2026-10-28c"></script>
+<script src="js/site.js?v=2026-10-28c"></script>
 </body>
 </html>

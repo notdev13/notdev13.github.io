@@ -1009,3 +1009,6 @@ button { font: inherit; cursor: pointer; color: inherit; }
 .terreno-opcoes .etapa h3 { color: var(--texto); }
 .terreno-opcoes .etapa p { color: var(--texto-suave); }
 .terreno-opcoes .etapas::before { background: var(--acento); }
+
+/* Portfólio em seção própria, depois de "Do terreno à chave" */
+.portfolio-secao .portfolio-cabecalho { margin-top: 0; }

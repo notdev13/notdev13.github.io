@@ -83,7 +83,7 @@
       'obras.erro': 'We couldn’t load the list of projects. Please reload the page.',
       'obra.casa': 'High-end home',
 
-      'obras.titulo': 'Open building sites in the <em>south of the island.</em>',
+      'obras.titulo': 'Works in progress in the <em>south of the island.</em>',
       'port.chapeu': 'Portfolio',
       'port.titulo': 'Residential buildings in <em>Curitiba and Itapoá.</em>',
       'port.dica': 'Swipe to see more',
@@ -298,7 +298,7 @@
       'obras.erro': 'No pudimos cargar la lista de obras. Recarga la página.',
       'obra.casa': 'Casa de alto nivel',
 
-      'obras.titulo': 'Obras abiertas en el <em>sur de la isla.</em>',
+      'obras.titulo': 'Obras en curso en el <em>sur de la isla.</em>',
       'port.chapeu': 'Portafolio',
       'port.titulo': 'Residenciales en <em>Curitiba y Itapoá.</em>',
       'port.dica': 'Desliza para ver',
@@ -513,7 +513,7 @@
       'obras.erro': 'Impossible de charger la liste des réalisations. Rechargez la page.',
       'obra.casa': 'Maison haut de gamme',
 
-      'obras.titulo': 'Chantiers ouverts dans le <em>sud de l’île.</em>',
+      'obras.titulo': 'Chantiers en cours dans le <em>sud de l’île.</em>',
       'port.chapeu': 'Portfolio',
       'port.titulo': 'Résidences à <em>Curitiba et Itapoá.</em>',
       'port.dica': 'Faites glisser pour voir',
