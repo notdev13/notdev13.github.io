@@ -42,7 +42,7 @@
       'nav.principal': 'Main',
       'nav.logo': 'MB2 Incorporações, home',
       'nav.obras': 'Projects',
-      'nav.como': 'How we build',
+      'nav.como': 'Process',
       'nav.campeche': 'Campeche',
       'nav.campecheLongo': 'Living in Campeche',
       'nav.contato': 'Contact',
@@ -51,6 +51,7 @@
       'nav.menuMovel': 'Mobile menu',
       'nav.abrirMenu': 'Open menu',
       'nav.fecharMenu': 'Close menu',
+      'zap.msg': 'Hello! I found MB2 through the website and would like to know more about the homes.',
       'tema.escuro': 'Switch to dark theme',
       'tema.claro': 'Switch to light theme',
 
@@ -172,7 +173,7 @@
       'nav.principal': 'Principal',
       'nav.logo': 'MB2 Incorporações, inicio',
       'nav.obras': 'Obras',
-      'nav.como': 'Cómo construimos',
+      'nav.como': 'Proceso',
       'nav.campeche': 'Campeche',
       'nav.campecheLongo': 'Vivir en Campeche',
       'nav.contato': 'Contacto',
@@ -181,6 +182,7 @@
       'nav.menuMovel': 'Menú del móvil',
       'nav.abrirMenu': 'Abrir menú',
       'nav.fecharMenu': 'Cerrar menú',
+      'zap.msg': '¡Hola! Vi el sitio de MB2 y quiero saber más sobre las casas.',
       'tema.escuro': 'Activar tema oscuro',
       'tema.claro': 'Activar tema claro',
 
@@ -302,7 +304,7 @@
       'nav.principal': 'Principal',
       'nav.logo': 'MB2 Incorporações, accueil',
       'nav.obras': 'Réalisations',
-      'nav.como': 'Notre méthode',
+      'nav.como': 'Processus',
       'nav.campeche': 'Campeche',
       'nav.campecheLongo': 'Vivre à Campeche',
       'nav.contato': 'Contact',
@@ -311,6 +313,7 @@
       'nav.menuMovel': 'Menu mobile',
       'nav.abrirMenu': 'Ouvrir le menu',
       'nav.fecharMenu': 'Fermer le menu',
+      'zap.msg': 'Bonjour ! J’ai découvert MB2 sur le site et j’aimerais en savoir plus sur les maisons.',
       'tema.escuro': 'Activer le thème sombre',
       'tema.claro': 'Activer le thème clair',
 
@@ -431,6 +434,7 @@
      então não há de onde tirar o português automaticamente. */
   var PT_EXTRA = {
     'nav.fecharMenu': 'Fechar menu',
+    'zap.msg': 'Olá! Vim pelo site da MB2 e quero saber mais sobre as casas.',
     'tema.claro': 'Ativar tema claro',
     'hero.cartao': 'Nossas casas',
     'hero.tour': 'Tour em vídeo',

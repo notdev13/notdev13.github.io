@@ -54,16 +54,34 @@
   });
   menuBtn.setAttribute("aria-label", tr("nav.abrirMenu", "Abrir menu"));
 
-  // No alto da página o menu fica sem fundo; depois que passa do botão do topo, esmaece
-  const ctaTopo = $("#hero-cta");
-  let aguardando = false;
-  function esmaecer() {
+  // No alto da página o menu fica sem fundo; rolando, encolhe. Some ao descer e volta ao subir.
+  let aguardando = false, ultimoY = scrollY;
+  function aoRolar() {
     aguardando = false;
-    topo.classList.toggle("no-topo", scrollY < 10 && menuMovel.hidden);
-    topo.classList.toggle("esmaecido", ctaTopo.getBoundingClientRect().bottom < topo.offsetHeight);
+    const y = scrollY, aberto = !menuMovel.hidden;
+    topo.classList.toggle("no-topo", y < 10 && !aberto);
+    topo.classList.toggle("compacto", y > 80);
+    // Só esconde depois de passar da altura do menu e com o foco fora dele
+    if (Math.abs(y - ultimoY) > 6) {
+      topo.classList.toggle("escondido", y > ultimoY && y > 200 && !aberto && !topo.contains(document.activeElement));
+      ultimoY = y;
+    }
   }
-  addEventListener("scroll", () => { if (!aguardando) { aguardando = true; requestAnimationFrame(esmaecer); } }, { passive: true });
-  esmaecer();
+  addEventListener("scroll", () => { if (!aguardando) { aguardando = true; requestAnimationFrame(aoRolar); } }, { passive: true });
+  topo.addEventListener("focusin", () => topo.classList.remove("escondido"));
+  aoRolar();
+
+  // O item da seção que está na tela fica em cobre
+  const itensNav = $$(".nav a");
+  if ("IntersectionObserver" in window) {
+    const espia = new IntersectionObserver((entradas) => {
+      entradas.forEach((e) => {
+        if (!e.isIntersecting) return;
+        itensNav.forEach((a) => a.toggleAttribute("aria-current", a.getAttribute("href") === "#" + e.target.id));
+      });
+    }, { rootMargin: "-45% 0px -50% 0px" });
+    itensNav.forEach((a) => { const alvo = $(a.getAttribute("href")); if (alvo) espia.observe(alvo); });
+  }
 
   // ---------- Carrega os dados ----------
   fetch("dados/obras.json")
@@ -196,25 +214,39 @@
 
     // ----- Contato: dados que a MB2 confirmar aparecem; os vazios ficam marcados -----
     const zap = $("#zap-fixo"), zapTexto = $("#zap-texto");
-    if (empresa.whatsapp) {
-      const n = empresa.whatsapp.replace(/\D/g, "");
-      zap.href = "https://wa.me/" + n;
-      zap.target = "_blank";
-      zap.rel = "noopener";
+    // Número com DDD vira link do WhatsApp com o 55 do Brasil e uma primeira mensagem pronta
+    const digitos = (n) => String(n).replace(/\D/g, "");
+    const zapNumero = empresa.whatsapp ? (digitos(empresa.whatsapp).length <= 11 ? "55" : "") + digitos(empresa.whatsapp) : "";
+    const telefone = empresa.telefone || empresa.whatsapp;
+    const telHref = telefone ? "tel:+" + (digitos(telefone).length <= 11 ? "55" : "") + digitos(telefone) : "";
+    function linksZap() {
+      if (!zapNumero) return;
+      const href = "https://wa.me/" + zapNumero + "?text=" + encodeURIComponent(tr("zap.msg", "Olá! Vim pelo site da MB2 e quero saber mais sobre as casas."));
+      $$(".link-zap").concat(zap).forEach((a) => { a.href = href; a.target = "_blank"; a.rel = "noopener"; });
+    }
+    if (zapNumero) {
       zapTexto.removeAttribute("data-i18n");
       zapTexto.textContent = "WhatsApp";
-      $$(".link-zap").forEach((a) => { a.href = zap.href; a.target = "_blank"; a.rel = "noopener"; });
+      linksZap();
     }
+    const linkTel = () => telefone ? `<a href="${telHref}">${esc(telefone)}</a>` : pendente();
+    const linkEmail = () => empresa.email ? `<a href="mailto:${esc(empresa.email)}">${esc(empresa.email)}</a>` : pendente();
+    // Pé do menu do celular: telefone e Instagram
+    const telMenu = $(".menu-movel-pe .tel-mb2"), instaMenu = $(".menu-movel-pe .insta-mb2");
+    if (telefone) { telMenu.href = telHref; telMenu.textContent = telefone; telMenu.hidden = false; }
+    if (empresa.instagram) { instaMenu.href = empresa.instagram; instaMenu.hidden = false; }
     function textosContato() {
       $("#campeche-foto img").alt = tr("camp.fotoAlt", "Casa da MB2 no Jardim Campeche");
       $("#dados-contato").innerHTML =
-        `${tr("cont.telZap", "Telefone e WhatsApp")}: ${empresa.whatsapp ? esc(empresa.whatsapp) : pendente()} &nbsp;·&nbsp; ${tr("rod.email", "E-mail")}: ${empresa.email ? esc(empresa.email) : pendente()}`;
+        `${tr("cont.telZap", "Telefone e WhatsApp")}: ${linkTel()} &nbsp;·&nbsp; ${tr("rod.email", "E-mail")}: ${linkEmail()}`;
+      $("#chamada-dados").innerHTML = [telefone && linkTel(), empresa.email && linkEmail()].filter(Boolean).join('<span aria-hidden="true">·</span>');
       $("#rodape-contato").innerHTML = [
-        [tr("rod.telefone", "Telefone"), empresa.telefone || empresa.whatsapp],
-        [tr("rod.email", "E-mail"), empresa.email],
-        [tr("rod.endereco", "Endereço"), empresa.endereco],
-        [tr("rod.cnpj", "CNPJ"), empresa.cnpj]
-      ].map(([k, v]) => `<li>${k} ${v ? esc(v) : pendente()}</li>`).join("");
+        [tr("rod.telefone", "Telefone"), telefone && linkTel()],
+        [tr("rod.email", "E-mail"), empresa.email && linkEmail()],
+        [tr("rod.endereco", "Endereço"), empresa.endereco && esc(empresa.endereco)],
+        [tr("rod.cnpj", "CNPJ"), empresa.cnpj && esc(empresa.cnpj)]
+      ].map(([k, v]) => `<li>${k} ${v || pendente()}</li>`).join("");
+      linksZap();
     }
     textosContato();
 
