@@ -1,87 +1,9 @@
-// Site da MB2 · comportamento da página. Os dados vêm de dados/obras.json.
+// Site da MB2 · página inicial. Menu, tema e WhatsApp ficam em js/base.js; os dados vêm de dados/obras.json.
 (function () {
   "use strict";
-  const $ = (s, r) => (r || document).querySelector(s);
-  const $$ = (s, r) => [...(r || document).querySelectorAll(s)];
-  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  // Textos montados aqui passam pela tradução (js/i18n.js); sem ela, fica o português
-  const tr = (chave, pt) => (window.MB2_I18N ? window.MB2_I18N.t(chave) : pt);
-  const pendente = () => `<span class="pendente">${tr("pendente", "a confirmar")}</span>`;
-  // "Casa alto padrão" é descrição, não nome próprio: traduz só esse começo
-  const nomeTraduzido = (nome) => String(nome).replace(/^Casa alto padrão/, () => tr("obra.casa", "Casa alto padrão"));
+  const { $, $$, esc, tr, pendente, ligarContato, foto, semFoto, nomeTraduzido, nomeEtapa, dataCurta } = window.MB2;
   const semMovimento = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const computador = matchMedia("(min-width: 821px)");
-
-  // Uma foto em dois tamanhos: o navegador escolhe pela largura da tela
-  function foto(nome, alt, extra) {
-    return `<img src="imagens/obras/${nome}-480.webp" srcset="imagens/obras/${nome}-480.webp 480w, imagens/obras/${nome}-1400.webp 1400w" sizes="${extra && extra.sizes ? extra.sizes : "(min-width: 821px) 33vw, 50vw"}" alt="${esc(alt)}" ${extra && extra.eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
-  }
-
-  // ---------- Menu ----------
-  const topo = $(".topo"), menuBtn = $("#menu-btn"), menuMovel = $("#menu-movel");
-  function abrirMenu(abre) {
-    menuMovel.hidden = !abre;
-    topo.classList.toggle("aberto", abre);
-    menuBtn.setAttribute("aria-expanded", String(abre));
-    menuBtn.setAttribute("aria-label", abre ? tr("nav.fecharMenu", "Fechar menu") : tr("nav.abrirMenu", "Abrir menu"));
-    document.body.style.overflow = abre ? "hidden" : "";
-    topo.classList.toggle("no-topo", !abre && scrollY < 10);
-  }
-  menuBtn.addEventListener("click", () => abrirMenu(menuMovel.hidden));
-  menuMovel.addEventListener("click", (e) => { if (e.target.closest("a")) abrirMenu(false); });
-  addEventListener("keydown", (e) => { if (e.key === "Escape" && !menuMovel.hidden) abrirMenu(false); });
-
-  // ---------- Tema claro / escuro ----------
-  // Abre sempre claro; o botão liga o escuro só durante a visita
-  const temaBtn = $("#tema-btn"), raiz = document.documentElement;
-  function rotuloTema() {
-    const escuro = raiz.getAttribute("data-theme") === "dark";
-    temaBtn.setAttribute("aria-pressed", String(escuro));
-    temaBtn.setAttribute("aria-label", escuro ? tr("tema.claro", "Ativar tema claro") : tr("tema.escuro", "Ativar tema escuro"));
-  }
-  temaBtn.addEventListener("click", () => {
-    const escuro = raiz.getAttribute("data-theme") !== "dark";
-    if (escuro) raiz.setAttribute("data-theme", "dark"); else raiz.removeAttribute("data-theme");
-    rotuloTema();
-  });
-  rotuloTema();
-
-  // Troca de idioma: refaz os rótulos que este arquivo escreve
-  document.addEventListener("mb2:lang", () => {
-    rotuloTema();
-    menuBtn.setAttribute("aria-label", menuMovel.hidden ? tr("nav.abrirMenu", "Abrir menu") : tr("nav.fecharMenu", "Fechar menu"));
-    $("#aviso-lancamentos").hidden = true;
-  });
-  menuBtn.setAttribute("aria-label", tr("nav.abrirMenu", "Abrir menu"));
-
-  // No alto da página o menu fica sem fundo; rolando, encolhe. Some ao descer e volta ao subir.
-  let aguardando = false, ultimoY = scrollY;
-  function aoRolar() {
-    aguardando = false;
-    const y = scrollY, aberto = !menuMovel.hidden;
-    topo.classList.toggle("no-topo", y < 10 && !aberto);
-    topo.classList.toggle("compacto", y > 80);
-    // Só esconde depois de passar da altura do menu e com o foco fora dele
-    if (Math.abs(y - ultimoY) > 6) {
-      topo.classList.toggle("escondido", y > ultimoY && y > 200 && !aberto && !topo.contains(document.activeElement));
-      ultimoY = y;
-    }
-  }
-  addEventListener("scroll", () => { if (!aguardando) { aguardando = true; requestAnimationFrame(aoRolar); } }, { passive: true });
-  topo.addEventListener("focusin", () => topo.classList.remove("escondido"));
-  aoRolar();
-
-  // O item da seção que está na tela fica em cobre
-  const itensNav = $$(".nav a");
-  if ("IntersectionObserver" in window) {
-    const espia = new IntersectionObserver((entradas) => {
-      entradas.forEach((e) => {
-        if (!e.isIntersecting) return;
-        itensNav.forEach((a) => a.toggleAttribute("aria-current", a.getAttribute("href") === "#" + e.target.id));
-      });
-    }, { rootMargin: "-45% 0px -50% 0px" });
-    itensNav.forEach((a) => { const alvo = $(a.getAttribute("href")); if (alvo) espia.observe(alvo); });
-  }
 
   // ---------- Carrega os dados ----------
   fetch("dados/obras.json")
@@ -92,7 +14,7 @@
     });
 
   function montar(dados) {
-    const obras = dados.obras, empresa = dados.empresa;
+    const obras = dados.obras, empresa = dados.empresa, etapas = dados.etapas || [];
     const d = obras.find((o) => o.id === dados.destaque) || obras[0];
 
     // ----- Topo: vídeo em todas as telas (fotos aparecem enquanto ele não carrega) -----
@@ -180,19 +102,46 @@
       if (d.suites) etiquetas.push(d.suites + " " + tr("obras.suites", "suítes"));
       if (d.vagas) etiquetas.push(d.vagas + " " + tr("obras.vagas", "vagas"));
       if (d.bairro) etiquetas.push(d.bairro);
-      if (d.situacao) etiquetas.push(d.situacao);
+      if (d.vendida) etiquetas.push(tr("obras.vendida", "Vendida"));
       $("#destaque-etiquetas").innerHTML = etiquetas.map((e) => `<span>${esc(e)}</span>`).join("");
     }
     textosDestaque();
 
-    // ----- Obras: as casas do Campeche em cartões grandes; os residenciais numa faixa compacta -----
+    // ----- Em construção agora: um cartão por canteiro, cada um com a própria página -----
+    function renderCanteiros() {
+      const canteiros = obras.filter((o) => o.tipo === "canteiro" && o.situacao === "em-construcao");
+      $("#grade-canteiros").innerHTML = canteiros.map((o) => {
+        const local = [o.bairro, o.cidade].filter(Boolean).join(" · ");
+        const ultima = (o.atualizacoes || [])[o.atualizacoes.length - 1];
+        const fotoSemana = (ultima && ultima.fotos && ultima.fotos[0]) || o.foto;
+        const posicao = etapas.indexOf(o.etapa);
+        const avanco = posicao < 0 ? 0 : Math.round(((posicao + 1) / etapas.length) * 100);
+        const linha = o.etapa
+          ? `${tr("obra.etapaAtual", "Etapa atual")}: ${nomeEtapa(o.etapa)}`
+          : tr("obra.etapaEmBreve", "Primeira atualização em breve");
+        const datas = [o.inicio && `${tr("obra.inicio", "Início")} ${dataCurta(o.inicio)}`, o.previsao && `${tr("obra.previsao", "Previsão")} ${dataCurta(o.previsao)}`].filter(Boolean).join(" · ");
+        return `<a class="card card-canteiro" href="obra.html?id=${encodeURIComponent(o.id)}">
+          <div class="moldura">${fotoSemana ? foto(fotoSemana, o.nome, { sizes: "(min-width: 821px) 33vw, 100vw" }) : semFoto(tr("obra.semFoto", "Foto da semana em breve"))}
+            <span class="selo selo-obra">${tr("obras.emConstrucao", "Em construção")}</span></div>
+          <span class="local">${local ? esc(local) : tr("obras.local", "Local") + " " + pendente()}</span>
+          <h3>${esc(o.nome)}</h3>
+          <span class="dados">${linha}${ultima ? ` · ${tr("obra.atualizadoEm", "atualizado em")} ${dataCurta(ultima.data)}` : ""}</span>
+          <span class="avanco" role="img" aria-label="${avanco}%"><i style="width:${avanco}%"></i></span>
+          ${datas ? `<span class="dados">${esc(datas)}</span>` : ""}
+        </a>`;
+      }).join("");
+    }
+    renderCanteiros();
+
+    // ----- Entregues: as casas do Campeche, com o selo de vendida -----
     function renderCasas() {
       $("#grade").innerHTML = obras.filter((o) => o.tipo === "casas").map((o) => {
         const local = [o.bairro, o.cidade].filter(Boolean).join(" · ");
-        const dadosObra = [o.area_m2 && o.area_m2 + " m²", o.suites && o.suites + " " + tr("obras.suites", "suítes"), o.situacao].filter(Boolean);
+        const dadosObra = [o.area_m2 && o.area_m2 + " m²", o.suites && o.suites + " " + tr("obras.suites", "suítes")].filter(Boolean);
         const nome = nomeTraduzido(o.nome);
-        return `<a class="card" href="#contato">
-          <div class="moldura">${foto(o.foto, nome, { sizes: "(min-width: 821px) 50vw, 100vw" })}</div>
+        return `<a class="card" href="obra.html?id=${encodeURIComponent(o.id)}">
+          <div class="moldura">${foto(o.foto, nome, { sizes: "(min-width: 821px) 50vw, 100vw" })}
+            ${o.vendida ? `<span class="selo selo-vendida">${tr("obras.vendida", "Vendida")}</span>` : ""}</div>
           <span class="local">${local ? esc(local) : tr("obras.local", "Local") + " " + pendente()}</span>
           <h3>${esc(nome)}</h3>
           <span class="dados">${dadosObra.length ? dadosObra.map(esc).join(" · ") : tr("obras.areaTipo", "Área e tipologia") + " " + pendente()}</span>
@@ -203,7 +152,7 @@
     // Na faixa só foto e nome: os dados que a MB2 ainda não confirmou não aparecem
     $("#faixa-residenciais").innerHTML = obras.filter((o) => o.tipo === "residenciais").map((o) => {
       const local = [o.bairro, o.cidade].filter(Boolean).join(" · ");
-      return `<a class="card card-faixa" href="#contato">
+      return `<a class="card card-faixa" href="obra.html?id=${encodeURIComponent(o.id)}">
         <div class="moldura">${foto(o.foto, o.nome, { sizes: "(min-width: 821px) 22vw, 62vw" })}</div>
         <h3>${esc(o.nome)}</h3>${local ? `<span class="local">${esc(local)}</span>` : ""}
       </a>`;
@@ -211,52 +160,20 @@
 
     // ----- Fotos das outras seções -----
     $("#campeche-foto").innerHTML = foto("11-casa-jardim-campeche-288m2", "", { sizes: "100vw" });
+    const textosCampeche = () => { $("#campeche-foto img").alt = tr("camp.fotoAlt", "Casa da MB2 no Jardim Campeche"); };
+    textosCampeche();
 
-    // ----- Contato: dados que a MB2 confirmar aparecem; os vazios ficam marcados -----
-    const zap = $("#zap-fixo"), zapTexto = $("#zap-texto");
-    // Número com DDD vira link do WhatsApp com o 55 do Brasil e uma primeira mensagem pronta
-    const digitos = (n) => String(n).replace(/\D/g, "");
-    const zapNumero = empresa.whatsapp ? (digitos(empresa.whatsapp).length <= 11 ? "55" : "") + digitos(empresa.whatsapp) : "";
-    const telefone = empresa.telefone || empresa.whatsapp;
-    const telHref = telefone ? "tel:+" + (digitos(telefone).length <= 11 ? "55" : "") + digitos(telefone) : "";
-    function linksZap() {
-      if (!zapNumero) return;
-      const href = "https://wa.me/" + zapNumero + "?text=" + encodeURIComponent(tr("zap.msg", "Olá! Vim pelo site da MB2 e quero saber mais sobre as casas."));
-      $$(".link-zap").concat(zap).forEach((a) => { a.href = href; a.target = "_blank"; a.rel = "noopener"; });
-    }
-    if (zapNumero) {
-      zapTexto.removeAttribute("data-i18n");
-      zapTexto.textContent = "WhatsApp";
-      linksZap();
-    }
-    const linkTel = () => telefone ? `<a href="${telHref}">${esc(telefone)}</a>` : pendente();
-    const linkEmail = () => empresa.email ? `<a href="mailto:${esc(empresa.email)}">${esc(empresa.email)}</a>` : pendente();
-    function textosContato() {
-      $("#campeche-foto img").alt = tr("camp.fotoAlt", "Casa da MB2 no Jardim Campeche");
-      $("#dados-contato").innerHTML =
-        `${tr("cont.telZap", "Telefone e WhatsApp")}: ${linkTel()} &nbsp;·&nbsp; ${tr("rod.email", "E-mail")}: ${linkEmail()}`;
-      $("#chamada-dados").innerHTML = [telefone && linkTel(), empresa.email && linkEmail()].filter(Boolean).join('<span aria-hidden="true">·</span>');
-      $("#rodape-contato").innerHTML = [
-        [tr("rod.telefone", "Telefone"), telefone && linkTel()],
-        [tr("rod.email", "E-mail"), empresa.email && linkEmail()],
-        [tr("rod.endereco", "Endereço"), empresa.endereco && esc(empresa.endereco)],
-        [tr("rod.cnpj", "CNPJ"), empresa.cnpj && esc(empresa.cnpj)]
-      ].map(([k, v]) => `<li>${k} ${v || pendente()}</li>`).join("");
-      linksZap();
-    }
-    textosContato();
+    // ----- Contato (botões de WhatsApp, rodapé, chamada final) -----
+    ligarContato(empresa);
 
     document.addEventListener("mb2:lang", () => {
       textosTopo();
       textosDestaque();
+      renderCanteiros();
       renderCasas();
-      textosContato();
+      textosCampeche();
+      $("#aviso-lancamentos").hidden = true;
     });
-    if (empresa.instagram) {
-      const ig = $("#instagram");
-      ig.href = empresa.instagram;
-      ig.hidden = false;
-    }
   }
 
   // ----- Lançamentos (prévia: ainda não envia para lugar nenhum) -----

@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title data-i18n="obra.metaTitulo">Obra · MB2 Incorporações</title>
+<meta name="description" data-i18n-attr="content:obra.metaDesc" content="Andamento da obra, etapa atual e fotos semanais. MB2 Incorporações, Campeche, Florianópolis.">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Archivo:wdth,wght@87.5,900&family=IBM+Plex+Sans:wght@500&display=swap">
+<!-- ?v= muda a cada publicação: o GitHub Pages deixa o navegador guardar CSS e JS por 10 min,
+     e sem isso a página nova pode abrir com o estilo antigo -->
+<link rel="stylesheet" href="css/estilo.css?v=2026-10-28b">
+<script>
+  // Aplica a escolha guardada antes de desenhar a página; sem escolha, segue o aparelho
+  // Sem escolha guardada, o site abre no tema escuro (o botão do menu continua trocando)
+  var t = "escuro";
+  try { var g = localStorage.getItem("tema"); if (g === "escuro" || g === "claro") t = g; } catch (e) {}
+  document.documentElement.setAttribute("data-theme", t === "escuro" ? "dark" : "light");
+</script>
+</head>
+<body class="pagina-interna">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="simbolo" viewBox="0 0 100 100"><polygon points="50,4 90,27 90,73 50,96 10,73 10,27" fill="none" stroke="currentColor" stroke-width="11" stroke-linejoin="round"/><polyline points="26,52 50,30 74,52" fill="none" stroke="currentColor" stroke-width="11" stroke-linejoin="round" stroke-linecap="round"/><rect x="42" y="56" width="16" height="16" fill="currentColor"/></symbol>
+  <symbol id="hx" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 1.8l8.8 5.1v10.2L12 22.2l-8.8-5.1V6.9z"/><path d="M7.6 12.6L12 8.6l4.4 4M8.9 11.6v4.6h6.2v-4.6"/></g></symbol>
+  <symbol id="hx-o" viewBox="0 0 48 48"><path d="M24 2.5l18.6 10.75v21.5L24 45.5 5.4 34.75v-21.5z" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></symbol>
+  <symbol id="logo-mb2" viewBox="0 0 520 150">
+    <use href="index.html#simbolo" x="10" y="10" width="100" height="100" style="color:#B8743A"/>
+    <text x="128" y="96" font-family="Archivo, 'Arial Black', sans-serif" font-weight="900" font-size="104" font-stretch="87.5%" fill="#F5F1EA" letter-spacing="-5">MB<tspan fill="#B8743A">2</tspan></text>
+    <text x="130" y="134" font-family="'IBM Plex Sans', sans-serif" font-weight="500" font-size="21" fill="#F5F1EA" letter-spacing="9.2">INCORPORAÇÕES</text>
+  </symbol>
+  <!-- No menu só o símbolo e "MB2": a linha INCORPORAÇÕES ficaria com 6 px, ilegível -->
+  <symbol id="logo-mb2-curto" viewBox="0 0 390 120">
+    <use href="index.html#simbolo" x="10" y="10" width="100" height="100" style="color:#B8743A"/>
+    <text x="128" y="96" font-family="Archivo, 'Arial Black', sans-serif" font-weight="900" font-size="104" font-stretch="87.5%" fill="#F5F1EA" letter-spacing="-5">MB<tspan fill="#B8743A">2</tspan></text>
+  </symbol>
+</svg>
+
+<header class="topo">
+  <div class="wrap">
+    <a class="logo" href="index.html#inicio" aria-label="MB2 Incorporações, início" data-i18n-attr="aria-label:nav.logo"><svg viewBox="0 0 390 120" aria-hidden="true"><use href="index.html#logo-mb2-curto"/></svg></a>
+    <nav class="nav" aria-label="Principal" data-i18n-attr="aria-label:nav.principal">
+      <a href="index.html#obras" data-i18n="nav.obras">Obras</a>
+      <a href="index.html#como-construimos" data-i18n="nav.como">Processo</a>
+      <a href="index.html#campeche" data-i18n="nav.campeche">Campeche</a>
+      <a href="terreno.html" data-i18n="nav.terreno">Terrenos</a>
+      <a href="index.html#contato" data-i18n="nav.contato">Contato</a>
+    </nav>
+    <div class="topo-acoes">
+    <a class="fale-topo link-zap" href="index.html#contato" data-i18n="nav.fale">Fale com a MB2</a>
+    <button class="redondo tema-btn" id="tema-btn" type="button" aria-pressed="false" aria-label="Ativar tema escuro">
+      <svg class="ic-lua" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+      <svg class="ic-sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+    </button>
+    <div class="lang notranslate" id="lang">
+      <button class="redondo lang-btn" id="langBtn" type="button" aria-haspopup="listbox" aria-expanded="false" aria-label="Escolher idioma" data-i18n-attr="aria-label:nav.idioma">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18"/></svg>
+        <span class="sr-only" id="langCur">PT</span>
+      </button>
+      <ul class="lang-list" id="langList" role="listbox" hidden>
+        <li data-lang="pt" role="option">Português</li>
+        <li data-lang="en" role="option">English</li>
+        <li data-lang="es" role="option">Español</li>
+        <li data-lang="fr" role="option">Français</li>
+      </ul>
+    </div>
+    <button class="redondo menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu-movel" aria-label="Abrir menu">
+      <svg class="ic-abrir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="ic-fechar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    </div>
+  </div>
+</header>
+<nav class="menu-movel" id="menu-movel" aria-label="Menu do celular" data-i18n-attr="aria-label:nav.menuMovel" hidden>
+  <a href="index.html#obras" data-i18n="nav.obras">Obras</a>
+  <a href="index.html#como-construimos" data-i18n="nav.comoLongo">Como construímos</a>
+  <a href="index.html#campeche" data-i18n="nav.campecheLongo">Viver no Campeche</a>
+  <a href="terreno.html" data-i18n="nav.terrenoLongo">Tem um terreno?</a>
+  <a href="index.html#contato" data-i18n="nav.contato">Contato</a>
+  <a class="btn btn-verde link-zap" href="index.html#contato" data-i18n="nav.fale">Fale com a MB2</a>
+</nav>
+
+<main class="pagina-obra" id="inicio">
+  <nav class="wrap migalhas" aria-label="Você está em" data-i18n-attr="aria-label:obra.migalhasAria">
+    <a href="index.html#obras" data-i18n="obra.voltar">Todas as obras</a>
+  </nav>
+
+  <section class="obra-topo wrap" id="obra-topo">
+    <div class="obra-foto" id="obra-foto"></div>
+    <div class="obra-resumo">
+      <span class="chapeu" id="obra-chapeu"></span>
+      <h1 class="titulo" id="obra-nome"></h1>
+      <p class="obra-local" id="obra-local"></p>
+      <div class="etiquetas" id="obra-etiquetas"></div>
+      <div class="obra-botoes">
+        <a class="btn btn-verde link-zap" id="obra-zap" href="index.html#contato" data-zap-msg="zap.msgObra" data-zap-pt="Olá! Vi a obra {obra} no site da MB2 e quero saber mais."><span data-i18n="obra.cta">Falar sobre esta obra</span></a>
+        <a class="btn btn-contorno" href="#atualizacoes" id="obra-ir-atualizacoes" data-i18n="obra.verAtualizacoes">Ver o andamento</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="secao wrap obra-andamento" id="atualizacoes" hidden>
+    <header class="cabecalho">
+      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="obra.andamentoChapeu">Andamento da obra</span></span>
+      <h2 class="titulo" data-i18n="obra.andamentoTitulo">Semana a semana, <em>do terreno à chave.</em></h2>
+      <p class="obra-andamento-texto" data-i18n="obra.andamentoTexto">Quem comprou acompanha por aqui. Quem está decidindo vê como a MB2 constrói.</p>
+    </header>
+    <ol class="etapas-barra" id="etapas-barra" aria-label="Etapas da obra" data-i18n-attr="aria-label:obra.etapasAria"></ol>
+    <ol class="linha-tempo" id="linha-tempo"></ol>
+    <p class="obra-vazio" id="obra-vazio" hidden data-i18n="obra.semAtualizacao">A obra acabou de começar. A primeira atualização entra aqui na próxima semana.</p>
+  </section>
+
+  <section class="secao wrap obra-video" id="obra-video" hidden>
+    <header class="cabecalho">
+      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="obra.videoChapeu">Em vídeo</span></span>
+    </header>
+    <video id="obra-video-player" controls playsinline preload="metadata"></video>
+  </section>
+
+  <section class="secao wrap obra-galeria" id="obra-galeria" hidden>
+    <header class="cabecalho">
+      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="obra.galeriaChapeu">Fotos</span></span>
+    </header>
+    <div class="galeria" id="galeria"></div>
+  </section>
+
+  <section class="secao chamada" id="contato" aria-label="Fale com a MB2" data-i18n-attr="aria-label:nav.fale">
+    <div class="wrap">
+      <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="cont.chapeu">Fale com quem constrói</span></span>
+      <h2 class="titulo" id="obra-chamada-titulo" data-i18n="obra.chamadaTitulo">Quer saber mais <em>sobre esta obra?</em></h2>
+      <p data-i18n="cham.p">A gente mostra a obra de perto, manda plantas e condições, e quem responde é a equipe que constrói.</p>
+      <div class="chamada-botoes">
+        <a class="btn btn-escuro link-zap" href="index.html#contato" data-zap-msg="zap.msgObra" data-zap-pt="Olá! Vi a obra {obra} no site da MB2 e quero saber mais." data-i18n="nav.fale">Fale com a MB2</a>
+        <a class="btn btn-contorno" href="index.html#obras" data-i18n="obra.outras">Ver outras obras</a>
+      </div>
+      <p class="chamada-dados" id="chamada-dados"></p>
+    </div>
+  </section>
+
+  <p class="wrap aviso obra-nao-encontrada" id="obra-nao-encontrada" hidden data-i18n="obra.naoEncontrada">Não encontrei essa obra. Volte para a lista de obras e escolha de novo.</p>
+</main>
+
+<a class="zap-fixo link-zap" id="zap-fixo" href="index.html#contato"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v11H8l-4 4z"/></svg><span id="zap-texto" data-i18n="zap.texto">Falar com a MB2</span></a>
+
+<footer class="rodape" id="rodape">
+  <div class="wrap rodape-topo">
+    <a class="logo" href="index.html#inicio" aria-label="MB2 Incorporações" data-i18n-attr="aria-label:rod.logo"><svg viewBox="0 0 520 150" aria-hidden="true"><use href="index.html#logo-mb2"/></svg></a>
+    <div class="sociais" aria-label="Redes sociais" data-i18n-attr="aria-label:rod.sociais">
+      <a id="instagram" href="index.html#" aria-label="Instagram da MB2" data-i18n-attr="aria-label:rod.instagram" target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="16" height="16" rx="5"/><circle cx="12" cy="12" r="3.5"/><circle cx="17" cy="7" r=".6" fill="currentColor"/></svg></a>
+      <span title="Facebook: a confirmar" data-i18n-attr="title:rod.facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></span>
+      <span title="YouTube: a confirmar" data-i18n-attr="title:rod.youtube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M10 9.5v5l4.5-2.5z" fill="currentColor"/></svg></span>
+    </div>
+  </div>
+    <div class="lancamentos" aria-label="Lançamentos" data-i18n-attr="aria-label:lanc.aria">
+      <div class="wrap">
+        <div>
+          <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="index.html#hx"/></svg><span data-i18n="lanc.chapeu">Lançamentos</span></span>
+          <h2 data-i18n="lanc.titulo">Saiba antes das <em class="italico">próximas casas da MB2.</em></h2>
+        </div>
+        <form id="form-lancamentos" novalidate>
+          <label class="sr-only" for="email" data-i18n="lanc.email">Seu e-mail</label>
+          <div class="campo">
+            <input id="email" type="email" placeholder="Seu e-mail" data-i18n-attr="placeholder:lanc.email" autocomplete="email">
+            <button type="submit" data-i18n="lanc.inscrever">Inscrever</button>
+          </div>
+          <label class="consentimento"><input id="consentimento" type="checkbox"> <span data-i18n="lanc.consent">Ao se cadastrar você concorda com a nossa política de privacidade.</span></label>
+          <p class="aviso" id="aviso-lancamentos" hidden></p>
+        </form>
+      </div>
+    </div>
+  <div class="wrap rodape-colunas">
+    <div>
+      <h4 data-i18n="rod.emp">Empreendimentos</h4>
+      <ul>
+        <li><a href="index.html#obras" data-i18n="rod.construcao">Em construção</a></li>
+        <li><a href="index.html#entregues" data-i18n="rod.casas">Casas no Campeche</a></li>
+        <li><a href="index.html#portfolio" data-i18n="rod.resid">Residenciais</a></li>
+        <li><a href="terreno.html" data-i18n="nav.terrenoLongo">Tem um terreno?</a></li>
+              </ul>
+    </div>
+    <div>
+      <h4 data-i18n="rod.inst">Institucional</h4>
+      <ul>
+        <li><a href="index.html#sobre" data-i18n="rod.sobre">Sobre a MB2</a></li>
+        <li><a href="index.html#como-construimos" data-i18n="rod.como">Como construímos</a></li>
+        <li><a href="index.html#campeche" data-i18n="rod.campeche">Viver no Campeche</a></li>
+        <li><span data-i18n="rod.privacidade">Política de privacidade</span> <span class="pendente" data-i18n="pendente">a confirmar</span></li>
+      </ul>
+    </div>
+    <div>
+      <h4 data-i18n="rod.contato">Contato</h4>
+      <ul id="rodape-contato"></ul>
+    </div>
+  </div>
+  <div class="rodape-base">
+    <div class="wrap">
+      <span>© 2026 MB2 Incorporações · mb2incorporacoes.com.br</span>
+      <span data-i18n="rod.base">Construtora · Campeche, Florianópolis · SC</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Tradução: sem defer e antes do site.js (ver js/i18n.js) -->
+<script src="js/i18n.js?v=2026-10-28b"></script>
+<script src="js/base.js?v=2026-10-28b"></script>
+<script src="js/obra.js?v=2026-10-28b"></script>
+</body>
+</html>

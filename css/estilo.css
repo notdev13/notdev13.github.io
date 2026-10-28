@@ -835,3 +835,177 @@ button { font: inherit; cursor: pointer; color: inherit; }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+
+/* ---------- Em construção agora (canteiros) e selos ---------- */
+.obras-texto { color: var(--texto-suave); max-width: 56ch; line-height: 1.6; }
+.entregues-cabecalho { margin-top: var(--e-64); }
+.card .moldura { position: relative; }
+.selo {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 1;
+  padding: 5px 10px;
+  border-radius: var(--raio-pilula);
+  font-size: var(--t-12);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(3, 3, 3, 0.72);
+  color: var(--areia);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.selo-obra { background: var(--acao); color: #fff; }
+.selo-vendida { background: var(--areia); color: var(--grafite); }
+.sem-foto {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 10px;
+  background: linear-gradient(160deg, var(--grafite-claro), var(--grafite-medio));
+  color: var(--cobre-claro);
+  font-size: var(--t-12);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: var(--e-16);
+}
+.sem-foto svg { width: 48px; height: 48px; color: var(--cobre); opacity: 0.8; }
+.card-canteiro .moldura { aspect-ratio: 4 / 3; }
+.avanco {
+  display: block;
+  height: 3px;
+  margin-top: 4px;
+  background: var(--linha);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.avanco i { display: block; height: 100%; background: var(--acento); border-radius: 2px; transition: width 0.8s var(--suave); }
+@media (min-width: 821px) {
+  .grade-canteiros { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grade-canteiros .card h3 { font-size: var(--t-20); }
+}
+
+/* Chamada para donos de terreno, dentro de "Do terreno à chave" */
+.terreno-chamada {
+  margin-top: var(--e-48);
+  padding: var(--e-24);
+  border: 1px solid var(--cobre-claro);
+  border-radius: 16px;
+  display: grid;
+  gap: var(--e-16);
+  background: var(--areia);
+}
+.terreno-chamada h3 { font-size: var(--t-20); font-weight: 500; color: var(--grafite); margin-top: 8px; }
+.terreno-chamada p { color: var(--cinza); line-height: 1.6; }
+.terreno-chamada .btn { justify-self: start; }
+@media (min-width: 821px) {
+  .terreno-chamada { grid-template-columns: minmax(0, 1fr) auto; align-items: center; padding: var(--e-32); }
+  .terreno-chamada .btn { justify-self: end; }
+}
+
+/* ---------- Páginas internas (obra, terreno): o menu começa com fundo ---------- */
+.pagina-interna main { padding-top: calc(var(--menu-altura) + env(safe-area-inset-top, 0px)); background: var(--fundo); color: var(--texto); }
+.migalhas { padding-block: var(--e-24) 0; font-size: var(--t-14); }
+.migalhas a { color: var(--texto-suave); text-decoration: none; }
+.migalhas a::before { content: "← "; }
+.migalhas a:hover { color: var(--acento); }
+
+/* ---------- Página da obra ---------- */
+.obra-topo { display: grid; gap: var(--e-24); padding-block: var(--e-24) var(--e-48); }
+.obra-foto { position: relative; aspect-ratio: 4 / 3; border-radius: var(--raio); overflow: hidden; background: var(--grafite-claro); }
+.obra-foto img { width: 100%; height: 100%; object-fit: cover; }
+.obra-resumo { display: grid; gap: var(--e-16); align-content: start; }
+.obra-resumo .titulo { font-size: clamp(32px, 7vw, 56px); font-weight: 300; line-height: 1.05; }
+.obra-local { color: var(--texto-suave); }
+.obra-resumo .etiquetas span { border-color: var(--linha); color: var(--texto); }
+.obra-botoes { display: grid; gap: 12px; margin-top: var(--e-8); }
+@media (min-width: 821px) {
+  .obra-topo { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--e-48); align-items: center; padding-block: var(--e-32) var(--e-64); }
+  .obra-foto { aspect-ratio: 3 / 2; border-radius: 16px; }
+  .obra-botoes { grid-template-columns: auto auto; justify-content: start; }
+}
+.obra-andamento-texto { color: var(--texto-suave); max-width: 56ch; line-height: 1.6; }
+/* Barra de etapas: as feitas em cobre, a atual com anel */
+.etapas-barra {
+  list-style: none;
+  margin: 0 0 var(--e-48);
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--e-16) 6px;
+}
+.etapas-barra li { display: grid; gap: 8px; justify-items: center; text-align: center; font-size: var(--t-12); color: var(--texto-suave); position: relative; }
+.etapas-barra li i { width: 100%; height: 4px; border-radius: 2px; background: var(--linha); }
+.etapas-barra li.feita i { background: var(--acento); }
+.etapas-barra li.atual i { background: var(--acento); box-shadow: 0 0 0 3px var(--fundo), 0 0 0 4px var(--acento); }
+.etapas-barra li.atual { color: var(--acento-escuro); font-weight: 600; }
+@media (min-width: 821px) { .etapas-barra { grid-template-columns: repeat(8, minmax(0, 1fr)); } }
+/* Linha do tempo das atualizações semanais, da mais nova para a mais antiga */
+.linha-tempo { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--e-32); }
+.linha-tempo li { display: grid; gap: var(--e-8); padding-left: 22px; position: relative; }
+.linha-tempo li::before { content: ""; position: absolute; left: 4px; top: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--acento); }
+.linha-tempo li::after { content: ""; position: absolute; left: 7px; top: 20px; bottom: calc(-1 * var(--e-32)); width: 2px; background: var(--linha); }
+.linha-tempo li:last-child::after { display: none; }
+.linha-tempo time { font-size: var(--t-14); font-weight: 600; color: var(--texto-titulo); }
+.linha-tempo .conteudo { display: grid; gap: 10px; }
+.linha-tempo .conteudo p { color: var(--texto); line-height: 1.6; max-width: 60ch; }
+.linha-tempo .fotos { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+.linha-tempo .fotos .moldura, .galeria .moldura { aspect-ratio: 4 / 3; border-radius: var(--raio); overflow: hidden; background: var(--grafite-claro); }
+.linha-tempo .fotos img, .galeria img { width: 100%; height: 100%; object-fit: cover; }
+.linha-tempo video, .obra-video video { width: 100%; border-radius: var(--raio); background: #000; }
+@media (min-width: 821px) {
+  .linha-tempo li { grid-template-columns: 140px minmax(0, 1fr); gap: var(--e-24); padding-left: 0; }
+  .linha-tempo li::before { left: 118px; }
+  .linha-tempo li::after { left: 121px; }
+  .linha-tempo .fotos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.obra-vazio { color: var(--texto-suave); padding: var(--e-24); border: 1px dashed var(--linha); border-radius: var(--raio); max-width: 56ch; }
+.galeria { display: grid; gap: var(--e-16); grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+.obra-nao-encontrada { padding-block: var(--e-64); }
+
+/* ---------- Página "Tem um terreno?" ---------- */
+.terreno-topo { display: grid; gap: var(--e-16); padding-block: var(--e-48) var(--e-24); }
+.terreno-topo .titulo { font-size: clamp(32px, 7vw, 60px); font-weight: 300; line-height: 1.05; max-width: 18ch; }
+.terreno-lede { color: var(--texto-suave); font-size: var(--t-16); line-height: 1.6; max-width: 58ch; }
+.terreno-opcoes { padding-top: 0; }
+.terreno-form-secao { background: var(--fundo-suave); }
+.terreno-form { display: grid; gap: var(--e-16); max-width: 640px; }
+.terreno-form label { display: grid; gap: 6px; font-size: var(--t-14); color: var(--texto); }
+.terreno-form input, .terreno-form select, .terreno-form textarea {
+  font: inherit;
+  color: var(--texto);
+  background: var(--fundo);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  padding: 12px 14px;
+  min-height: var(--toque);
+}
+.terreno-form input:focus-visible, .terreno-form select:focus-visible, .terreno-form textarea:focus-visible { outline: 2px solid var(--acento); outline-offset: 1px; }
+.terreno-form fieldset { border: 0; margin: 0; padding: 0; display: grid; gap: 8px; }
+.terreno-form legend { font-size: var(--t-14); margin-bottom: 6px; padding: 0; }
+.terreno-form .opcao { display: flex; align-items: center; gap: 10px; min-height: var(--toque); font-size: var(--t-16); }
+.terreno-form .opcao input { accent-color: var(--acao); width: 20px; height: 20px; min-height: 0; }
+.terreno-botoes { display: grid; gap: 12px; margin-top: var(--e-8); }
+.terreno-nota { font-size: var(--t-12); color: var(--texto-suave); line-height: 1.5; }
+.terreno-form .aviso { color: var(--acento-escuro); }
+@media (min-width: 821px) {
+  .terreno-form-secao .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: var(--e-64); align-items: start; }
+  .terreno-botoes { grid-template-columns: auto auto; justify-content: start; }
+}
+.terreno-provas { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--e-24); }
+.terreno-provas li { display: grid; gap: 4px; }
+.terreno-provas b { font-family: var(--fonte-titulo); font-weight: 400; font-size: 48px; line-height: 1; color: var(--acento); }
+.terreno-provas span { color: var(--texto-suave); line-height: 1.5; max-width: 32ch; }
+.terreno-links { margin-top: var(--e-32); color: var(--texto-suave); }
+.terreno-links a { color: var(--acento-escuro); }
+@media (min-width: 821px) { .terreno-provas { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* Etapas fora do bloco claro (página do terreno): seguem o tema da página */
+.terreno-opcoes .etapa .numero { background: var(--fundo); }
+.terreno-opcoes .etapa h3 { color: var(--texto); }
+.terreno-opcoes .etapa p { color: var(--texto-suave); }
+.terreno-opcoes .etapas::before { background: var(--acento); }
