@@ -57,7 +57,7 @@
       'tema.claro': 'Switch to light theme',
 
       'hero.aria': 'Introduction',
-      'hero.titulo': '14 years of building. <em>Now in the south of the island.</em>',
+      'hero.titulo': '<span>Designed with solidity.</span> <span>Delivered ahead of time.</span> <span>Finished to surprise.</span> <em>For 14 years, we have turned robust engineering into premium art.</em>',
       'hero.cta': 'See our projects',
       'hero.rolar': 'Scroll down',
       'hero.cartao': 'Our homes',
@@ -272,7 +272,7 @@
       'tema.claro': 'Activar tema claro',
 
       'hero.aria': 'Presentación',
-      'hero.titulo': '14 años construyendo. <em>Hoy, en el sur de la isla.</em>',
+      'hero.titulo': '<span>Proyectar con solidez.</span> <span>Entregar con anticipación.</span> <span>Sorprender en el acabado.</span> <em>Hace 14 años que transformamos ingeniería robusta en arte premium.</em>',
       'hero.cta': 'Ver nuestras obras',
       'hero.rolar': 'Desliza para ver',
       'hero.cartao': 'Nuestras casas',
@@ -487,7 +487,7 @@
       'tema.claro': 'Activer le thème clair',
 
       'hero.aria': 'Présentation',
-      'hero.titulo': '14 ans de construction. <em>Aujourd’hui, au sud de l’île.</em>',
+      'hero.titulo': '<span>Concevoir avec solidité.</span> <span>Livrer en avance.</span> <span>Surprendre par les finitions.</span> <em>Depuis 14 ans, nous transformons une ingénierie robuste en art premium.</em>',
       'hero.cta': 'Voir nos réalisations',
       'hero.rolar': 'Faites défiler',
       'hero.cartao': 'Nos maisons',
