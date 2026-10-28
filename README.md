@@ -33,7 +33,10 @@ o que não funciona abrindo o arquivo direto.
 - Nova obra: adicione a foto em dois tamanhos em `imagens/obras/` e um item em
   `dados/obras.json`.
 - Telefone, WhatsApp, e-mail, endereço e CNPJ: preencha em `empresa` no JSON.
-  Com o WhatsApp preenchido, o botão fixo do celular abre a conversa.
+  Com o WhatsApp preenchido (com DDD; o 55 do Brasil entra sozinho), todos os botões
+  "Fale com a MB2" e o botão fixo do celular abrem a conversa com uma primeira
+  mensagem pronta (chave `zap.msg` em `js/i18n.js`). O destino de `#contato` é a
+  chamada final da página, que mostra telefone e e-mail.
 - Mudou `css/estilo.css` ou algum arquivo de `js/`: troque o `?v=` desses arquivos
   no `index.html` (por exemplo, para a data do dia). O GitHub Pages deixa o
   navegador guardar CSS e JS por 10 minutos; sem trocar o `?v=`, quem já tinha

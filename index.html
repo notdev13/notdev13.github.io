@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Archivo:wdth,wght@87.5,900&family=IBM+Plex+Sans:wght@500&display=swap">
 <!-- ?v= muda a cada publicação: o GitHub Pages deixa o navegador guardar CSS e JS por 10 min,
      e sem isso a página nova pode abrir com o estilo antigo -->
-<link rel="stylesheet" href="css/estilo.css?v=2026-10-27b">
+<link rel="stylesheet" href="css/estilo.css?v=2026-10-28">
 <script>
   // Aplica a escolha guardada antes de desenhar a página; sem escolha, segue o aparelho
   // Sem escolha guardada, o site abre no tema escuro (o botão do menu continua trocando)
@@ -31,17 +31,23 @@
     <text x="128" y="96" font-family="Archivo, 'Arial Black', sans-serif" font-weight="900" font-size="104" font-stretch="87.5%" fill="#F5F1EA" letter-spacing="-5">MB<tspan fill="#B8743A">2</tspan></text>
     <text x="130" y="134" font-family="'IBM Plex Sans', sans-serif" font-weight="500" font-size="21" fill="#F5F1EA" letter-spacing="9.2">INCORPORAÇÕES</text>
   </symbol>
+  <!-- No menu só o símbolo e "MB2": a linha INCORPORAÇÕES ficaria com 6 px, ilegível -->
+  <symbol id="logo-mb2-curto" viewBox="0 0 390 120">
+    <use href="#simbolo" x="10" y="10" width="100" height="100" style="color:#B8743A"/>
+    <text x="128" y="96" font-family="Archivo, 'Arial Black', sans-serif" font-weight="900" font-size="104" font-stretch="87.5%" fill="#F5F1EA" letter-spacing="-5">MB<tspan fill="#B8743A">2</tspan></text>
+  </symbol>
 </svg>
 
 <header class="topo">
   <div class="wrap">
-    <a class="logo" href="#inicio" aria-label="MB2 Incorporações, início" data-i18n-attr="aria-label:nav.logo"><svg viewBox="0 0 520 150" aria-hidden="true"><use href="#logo-mb2"/></svg></a>
+    <a class="logo" href="#inicio" aria-label="MB2 Incorporações, início" data-i18n-attr="aria-label:nav.logo"><svg viewBox="0 0 390 120" aria-hidden="true"><use href="#logo-mb2-curto"/></svg></a>
     <nav class="nav" aria-label="Principal" data-i18n-attr="aria-label:nav.principal">
       <a href="#obras" data-i18n="nav.obras">Obras</a>
-      <a href="#como-construimos" data-i18n="nav.como">Como construímos</a>
+      <a href="#como-construimos" data-i18n="nav.como">Processo</a>
       <a href="#campeche" data-i18n="nav.campeche">Campeche</a>
       <a href="#contato" data-i18n="nav.contato">Contato</a>
     </nav>
+    <div class="topo-acoes">
     <a class="fale-topo link-zap" href="#contato" data-i18n="nav.fale">Fale com a MB2</a>
     <button class="redondo tema-btn" id="tema-btn" type="button" aria-pressed="false" aria-label="Ativar tema escuro">
       <svg class="ic-lua" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
@@ -63,11 +69,12 @@
       <svg class="ic-abrir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       <svg class="ic-fechar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
+    </div>
   </div>
 </header>
 <nav class="menu-movel" id="menu-movel" aria-label="Menu do celular" data-i18n-attr="aria-label:nav.menuMovel" hidden>
   <a href="#obras" data-i18n="nav.obras">Obras</a>
-  <a href="#como-construimos" data-i18n="nav.como">Como construímos</a>
+  <a href="#como-construimos" data-i18n="nav.comoLongo">Como construímos</a>
   <a href="#campeche" data-i18n="nav.campecheLongo">Viver no Campeche</a>
   <a href="#contato" data-i18n="nav.contato">Contato</a>
   <a class="btn btn-verde link-zap" href="#contato" data-i18n="nav.fale">Fale com a MB2</a>
@@ -90,7 +97,7 @@
         <button class="redondo so-fotos" id="hero-next" type="button" aria-label="Próxima foto" data-i18n-attr="aria-label:hero.fotoProx"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
         <button class="redondo hero-pausa" id="hero-pausa" type="button" aria-label="Pausar vídeo" data-i18n-attr="aria-label:hero.pausar" aria-pressed="false"><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="7" y="6" width="3" height="12"/><rect x="14" y="6" width="3" height="12"/></svg><svg class="ic-play" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
       </div>
-      <a class="hero-rolar" href="#destaque"><span data-i18n="hero.rolar">Role para ver</span><i aria-hidden="true"></i></a>
+      <a class="hero-rolar" href="#obras"><span data-i18n="hero.rolar">Role para ver</span><i aria-hidden="true"></i></a>
       <div class="hero-cartao">
         <span class="chapeu" id="hero-cartao-titulo">Nossas casas</span>
         <small id="hero-legenda"></small>
@@ -168,7 +175,7 @@
     </div>
   </section>
 
-  <!-- Seção oculta por enquanto (pedido de Gabriel, 27/10/2026). Para voltar: tirar "hidden" e devolver id="contato" aqui (e tirar do rodapé). -->
+  <!-- Seção oculta (pedido de Gabriel, 27/10/2026). O contato fica na chamada final logo abaixo, que é o destino de #contato. -->
   <section class="secao contato" id="contato-secao" hidden>
     <div class="wrap">
       <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="cont.chapeu">Fale com quem constrói</span></span>
@@ -186,7 +193,7 @@
     </div>
   </section>
 
-  <section class="secao chamada" aria-label="Fale com a MB2" data-i18n-attr="aria-label:nav.fale">
+  <section class="secao chamada" id="contato" aria-label="Fale com a MB2" data-i18n-attr="aria-label:nav.fale">
     <div class="wrap">
       <span class="chapeu"><svg class="hx" aria-hidden="true"><use href="#hx"/></svg><span data-i18n="cont.chapeu">Fale com quem constrói</span></span>
       <h2 class="titulo" data-i18n="cham.titulo">Quer conhecer uma casa <em>da MB2?</em></h2>
@@ -195,13 +202,14 @@
         <a class="btn btn-escuro link-zap" href="#contato" data-i18n="nav.fale">Fale com a MB2</a>
         <a class="btn btn-contorno" href="#obras" data-i18n="cham.casas">Ver as casas</a>
       </div>
+      <p class="chamada-dados" id="chamada-dados"></p>
     </div>
   </section>
 </main>
 
 <a class="zap-fixo link-zap" id="zap-fixo" href="#contato"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16v11H8l-4 4z"/></svg><span id="zap-texto" data-i18n="zap.texto">Falar com a MB2</span></a>
 
-<footer class="rodape" id="contato">
+<footer class="rodape" id="rodape">
   <div class="wrap rodape-topo">
     <a class="logo" href="#inicio" aria-label="MB2 Incorporações" data-i18n-attr="aria-label:rod.logo"><svg viewBox="0 0 520 150" aria-hidden="true"><use href="#logo-mb2"/></svg></a>
     <div class="sociais" aria-label="Redes sociais" data-i18n-attr="aria-label:rod.sociais">
@@ -258,7 +266,7 @@
 </footer>
 
 <!-- Tradução: sem defer e antes do site.js (ver js/i18n.js) -->
-<script src="js/i18n.js?v=2026-10-27b"></script>
-<script src="js/site.js?v=2026-10-27b"></script>
+<script src="js/i18n.js?v=2026-10-28"></script>
+<script src="js/site.js?v=2026-10-28"></script>
 </body>
 </html>
