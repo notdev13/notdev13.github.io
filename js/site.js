@@ -231,10 +231,6 @@
     }
     const linkTel = () => telefone ? `<a href="${telHref}">${esc(telefone)}</a>` : pendente();
     const linkEmail = () => empresa.email ? `<a href="mailto:${esc(empresa.email)}">${esc(empresa.email)}</a>` : pendente();
-    // Pé do menu do celular: telefone e Instagram
-    const telMenu = $(".menu-movel-pe .tel-mb2"), instaMenu = $(".menu-movel-pe .insta-mb2");
-    if (telefone) { telMenu.href = telHref; telMenu.textContent = telefone; telMenu.hidden = false; }
-    if (empresa.instagram) { instaMenu.href = empresa.instagram; instaMenu.hidden = false; }
     function textosContato() {
       $("#campeche-foto img").alt = tr("camp.fotoAlt", "Casa da MB2 no Jardim Campeche");
       $("#dados-contato").innerHTML =

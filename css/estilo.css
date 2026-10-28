@@ -224,7 +224,7 @@ button { font: inherit; cursor: pointer; color: inherit; }
 .topo.no-topo { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
 /* Some ao descer a página e volta ao subir */
 .topo.escondido { transform: translateY(calc(-100% - env(safe-area-inset-top, 0px))); }
-.topo.aberto { background: rgba(3, 3, 3, 0.96); }
+.topo.aberto { background: rgba(3, 3, 3, 0.88); }
 .topo .wrap {
   display: flex;
   align-items: center;
@@ -289,28 +289,16 @@ button { font: inherit; cursor: pointer; color: inherit; }
   gap: var(--e-8);
   overflow-y: auto;
 }
-.menu-movel > a:not(.btn) {
+.menu-movel a:not(.btn) {
   display: flex;
   align-items: center;
-  min-height: 64px;
-  font-family: var(--fonte-titulo);
-  font-size: 32px;
-  font-weight: 400;
+  min-height: 56px;
+  font-size: var(--t-20);
+  font-weight: 500;
   text-decoration: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 .menu-movel .btn { margin-top: auto; }
-/* Pé do menu do celular: telefone e Instagram */
-.menu-movel-pe { display: flex; justify-content: space-between; gap: var(--e-16); padding-top: var(--e-8); font-size: var(--t-14); color: var(--texto-inverso-suave); }
-.menu-movel-pe a { display: inline-flex; align-items: center; min-height: var(--toque); text-decoration: none; }
-/* Itens entram em cascata quando o menu abre */
-.menu-movel > * { animation: entra-menu 0.5s var(--suave) both; }
-.menu-movel > :nth-child(2) { animation-delay: 60ms; }
-.menu-movel > :nth-child(3) { animation-delay: 120ms; }
-.menu-movel > :nth-child(4) { animation-delay: 180ms; }
-.menu-movel > :nth-child(5) { animation-delay: 240ms; }
-.menu-movel > :nth-child(6) { animation-delay: 300ms; }
-@keyframes entra-menu { from { opacity: 0; transform: translateY(12px); } }
 
 @media (min-width: 821px) {
   /* Três zonas: logo à esquerda, itens no centro, ações à direita */
@@ -772,7 +760,6 @@ button { font: inherit; cursor: pointer; color: inherit; }
 }
 .zap-fixo svg { width: 22px; height: 22px; }
 @media (min-width: 821px) { .zap-fixo { display: none; } }
-.topo.aberto ~ .zap-fixo { display: none; }
 
 /* ---------- Cadastro de lançamentos (no rodapé) ---------- */
 .lancamentos { padding-block: var(--e-32); border-block: 1px solid rgba(255, 255, 255, 0.1); }
