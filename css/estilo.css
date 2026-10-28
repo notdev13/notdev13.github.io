@@ -1013,12 +1013,6 @@ button { font: inherit; cursor: pointer; color: inherit; }
 /* Portfólio em seção própria, depois de "Do terreno à chave" */
 .portfolio-secao .portfolio-cabecalho { margin-top: 0; }
 
-/* Topo com o manifesto (três frases + assinatura): letra menor que o título curto */
-.hero h2.hero-manifesto { font-size: clamp(24px, 7vw, 32px); line-height: 1.12; max-width: 22ch; }
-.hero-manifesto span { display: block; }
-.hero-manifesto em { margin-top: 0.6em; font-size: 0.82em; line-height: 1.2; max-width: 24ch; }
-@media (min-width: 821px) {
-  .hero h2.hero-manifesto { font-size: clamp(32px, 3vw, 46px); max-width: none; }
-  .hero-manifesto span { white-space: nowrap; }
-  .hero-manifesto em { max-width: 30ch; }
-}
+
+/* Texto do topo "Engenharia robusta, acabamento premium.": duas linhas no computador */
+@media (min-width: 821px) { .hero h2 { font-size: clamp(44px, 4.2vw, 64px); max-width: 15.5em; } }
