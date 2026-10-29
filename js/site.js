@@ -167,6 +167,11 @@
     }
     textosDestaque();
 
+
+    // ----- Antes/depois: só existe se a obra em destaque tiver o campo "antes_depois" -----
+    const ad = d.antes_depois;
+    if (ad && ad.depois && (ad.antes || ad.demo)) montarAntesDepois(ad);
+
     // ----- Obras: as casas do Campeche em cartões grandes; os residenciais numa faixa compacta -----
     function renderCasas() {
       $("#grade").innerHTML = obras.filter((o) => o.tipo === "casas").map((o) => {
@@ -229,6 +234,87 @@
       ig.href = empresa.instagram;
       ig.hidden = false;
     }
+  }
+
+
+  // ---------- Comparador antes/depois ----------
+  // Modo demo (ad.demo): mostra a mesma foto real em cinza contra a colorida, rotulado como exemplo.
+  function montarAntesDepois(ad) {
+    const secao = $("#evolucao"), alvo = $("#antes-depois");
+    const demo = !!ad.demo;
+    const antesNome = demo ? ad.depois : ad.antes;
+    const img = (nome, cls) => `<img class="${cls}" src="imagens/obras/${nome}-480.webp" srcset="imagens/obras/${nome}-480.webp 480w, imagens/obras/${nome}-1400.webp 1400w" sizes="(min-width: 821px) 1100px, 100vw" alt="" loading="lazy" decoding="async" draggable="false">`;
+    alvo.innerHTML = `<figure class="ad">
+      <div class="ad-palco${semMovimento ? "" : " ad-entra"}">
+        ${img(ad.depois, "ad-img")}
+        <div class="ad-topo">${img(antesNome, "ad-img" + (demo ? " ad-cinza" : ""))}</div>
+        <span class="ad-chip ad-chip-antes"></span><span class="ad-chip ad-chip-depois"></span>
+        <div class="ad-alca" role="slider" tabindex="0" aria-orientation="horizontal" aria-valuemin="0" aria-valuemax="100"><span class="ad-botao" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 7l-5 5 5 5M15 7l5 5-5 5"/></svg></span></div>
+      </div>
+      <figcaption class="ad-legenda"></figcaption>
+    </figure>`;
+    const palco = $(".ad-palco", alvo), topoEl = $(".ad-topo", alvo), alca = $(".ad-alca", alvo);
+    let pos = semMovimento ? 50 : 6;
+    function aplica(p, final) {
+      pos = Math.max(0, Math.min(100, p));
+      palco.style.setProperty("--p", pos + "%");
+      if (final !== false) {
+        const v = Math.round(pos);
+        alca.setAttribute("aria-valuenow", String(v));
+        alca.setAttribute("aria-valuetext", tr("ad.valor", "{n}% da foto de antes visível").replace("{n}", v));
+      }
+    }
+    function textos() {
+      $(".ad-chip-antes", alvo).textContent = tr("ad.antes", "Antes");
+      $(".ad-chip-depois", alvo).textContent = tr("ad.depois", "Depois");
+      alca.setAttribute("aria-label", tr("ad.slider", "Comparar antes e depois"));
+      $$(".ad-img", alvo).forEach((i) => (i.alt = ""));
+      $(".ad-legenda", alvo).innerHTML = demo
+        ? `<b class="ad-exemplo">${esc(tr("ad.exemplo", "Exemplo"))}</b> ${esc(tr("ad.demoNota", "Exemplo do componente: fotos reais do “antes” ainda a enviar."))}`
+        : [ad.legenda_antes && `${esc(tr("ad.antes", "Antes"))}: ${esc(ad.legenda_antes)}`, ad.legenda_depois && `${esc(tr("ad.depois", "Depois"))}: ${esc(ad.legenda_depois)}`].filter(Boolean).join(" &nbsp;·&nbsp; ");
+      palco.setAttribute("role", "group");
+      palco.setAttribute("aria-label", tr("ad.fotoAlt", "Comparação da mesma casa"));
+    }
+    textos();
+    document.addEventListener("mb2:lang", textos);
+    aplica(pos);
+    secao.hidden = false;
+
+    // Entrada: a divisória vai de 6% a 50% quando a seção aparece (nada disso com movimento reduzido)
+    if (!semMovimento) {
+      const entrar = () => { requestAnimationFrame(() => { aplica(50); setTimeout(() => palco.classList.remove("ad-entra"), 1000); }); };
+      if ("IntersectionObserver" in window) {
+        const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { io.disconnect(); entrar(); } }, { threshold: 0.4 });
+        io.observe(palco);
+      } else { palco.classList.remove("ad-entra"); aplica(50); }
+    }
+
+    // Mouse e toque (pointer events); o gesto vertical continua rolando a página
+    let arrastando = false;
+    const daPosicao = (e) => { const r = palco.getBoundingClientRect(); return ((e.clientX - r.left) / r.width) * 100; };
+    palco.addEventListener("pointerdown", (e) => {
+      if (e.button > 0) return;
+      arrastando = true;
+      palco.classList.remove("ad-entra");
+      palco.setPointerCapture(e.pointerId);
+      palco.classList.add("ad-arrasta");
+      aplica(daPosicao(e));
+      alca.focus({ preventScroll: true });
+    });
+    palco.addEventListener("pointermove", (e) => { if (arrastando) aplica(daPosicao(e)); });
+    const fim = () => { arrastando = false; palco.classList.remove("ad-arrasta"); };
+    palco.addEventListener("pointerup", fim);
+    palco.addEventListener("pointercancel", fim);
+
+    // Teclado: setas, Home/End, PageUp/PageDown
+    alca.addEventListener("keydown", (e) => {
+      const passo = e.shiftKey ? 10 : 5;
+      const mapa = { ArrowLeft: pos - passo, ArrowDown: pos - passo, ArrowRight: pos + passo, ArrowUp: pos + passo, PageDown: pos - 10, PageUp: pos + 10, Home: 0, End: 100 };
+      if (!(e.key in mapa)) return;
+      e.preventDefault();
+      palco.classList.remove("ad-entra");
+      aplica(mapa[e.key]);
+    });
   }
 
   // ----- Lançamentos (prévia: ainda não envia para lugar nenhum) -----

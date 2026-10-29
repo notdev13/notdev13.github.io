@@ -807,6 +807,48 @@ button { font: inherit; cursor: pointer; color: inherit; }
 /* No celular, o botão fixo não pode cobrir o rodapé */
 @media (max-width: 820px) { .rodape-base .wrap { padding-bottom: 88px; } }
 
+/* ---------- Comparador antes/depois ---------- */
+.ad { margin: 0; }
+.ad-palco {
+  --p: 50%;
+  position: relative; overflow: hidden; border-radius: var(--raio);
+  aspect-ratio: 4 / 5; background: var(--fundo-suave);
+  touch-action: pan-y; user-select: none; -webkit-user-select: none; cursor: ew-resize;
+}
+.ad-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.ad-topo { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--p)) 0 0); }
+.ad-cinza { filter: grayscale(1) contrast(0.95) brightness(0.9); }
+.ad-alca {
+  position: absolute; top: 0; bottom: 0; left: var(--p); width: var(--toque); margin-left: calc(var(--toque) / -2);
+  display: grid; place-items: center; cursor: ew-resize; outline: none;
+}
+.ad-alca::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px; background: var(--branco); box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25); }
+.ad-botao {
+  position: relative; width: var(--toque); height: var(--toque); border-radius: var(--raio-pilula);
+  display: grid; place-items: center; background: var(--branco); color: var(--grafite);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+.ad-botao svg { width: 22px; height: 22px; }
+.ad-alca:focus-visible .ad-botao { outline: 3px solid var(--acento); outline-offset: 3px; }
+.ad-chip {
+  position: absolute; top: var(--e-16); padding: 6px 12px; border-radius: var(--raio-pilula);
+  font-size: var(--t-12); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  background: rgba(20, 21, 22, 0.78); color: var(--areia); pointer-events: none;
+}
+.ad-chip-antes { left: var(--e-16); }
+.ad-chip-depois { right: var(--e-16); }
+.ad-entra .ad-topo { transition: clip-path 0.9s var(--suave); }
+.ad-entra .ad-alca { transition: left 0.9s var(--suave); }
+.ad-legenda { margin-top: var(--e-16); font-size: var(--t-14); color: var(--texto-suave); }
+.ad-exemplo {
+  display: inline-block; margin-right: 6px; padding: 2px 8px; border-radius: var(--raio-pilula);
+  font-size: var(--t-12); letter-spacing: 0.06em; text-transform: uppercase; font-weight: 700;
+  color: var(--acento-escuro); border: 1px solid var(--acento);
+}
+@media (min-width: 821px) {
+  .ad-palco { aspect-ratio: 16 / 9; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition: none !important; animation: none !important; }

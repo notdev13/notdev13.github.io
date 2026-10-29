@@ -140,6 +140,17 @@
       'lanc.erroConsent': 'Tick the privacy policy box to continue.',
       'lanc.previa': 'This is a preview: sign-up is not yet connected to a mailing list.',
 
+      'ad.aria': 'Project progress',
+      'ad.chapeu': 'Project progress',
+      'ad.titulo': 'Drag to <em>compare.</em>',
+      'ad.antes': 'Before',
+      'ad.depois': 'After',
+      'ad.slider': 'Compare before and after',
+      'ad.valor': '{n}% of the before photo visible',
+      'ad.exemplo': 'Example',
+      'ad.demoNota': 'Component example: the real “before” photos are still to be sent.',
+      'ad.fotoAlt': 'Comparison of the same home',
+
       'zap.texto': 'Talk to MB2',
 
       'rod.logo': 'MB2 Incorporações',
@@ -269,6 +280,17 @@
       'lanc.erroEmail': 'Escribe un e-mail válido, como nombre@ejemplo.com.',
       'lanc.erroConsent': 'Marca la casilla de la política de privacidad para continuar.',
       'lanc.previa': 'Esto es una vista previa: el registro aún no está conectado a una lista de e-mails.',
+
+      'ad.aria': 'Evolución de la obra',
+      'ad.chapeu': 'Evolución de la obra',
+      'ad.titulo': 'Arrastra para <em>comparar.</em>',
+      'ad.antes': 'Antes',
+      'ad.depois': 'Después',
+      'ad.slider': 'Comparar antes y después',
+      'ad.valor': '{n}% de la foto de antes visible',
+      'ad.exemplo': 'Ejemplo',
+      'ad.demoNota': 'Ejemplo del componente: las fotos reales del “antes” aún están por enviar.',
+      'ad.fotoAlt': 'Comparación de la misma casa',
 
       'zap.texto': 'Habla con MB2',
 
@@ -400,6 +422,17 @@
       'lanc.erroConsent': 'Cochez la case de la politique de confidentialité pour continuer.',
       'lanc.previa': 'Ceci est un aperçu : l’inscription n’est pas encore reliée à une liste d’e-mails.',
 
+      'ad.aria': 'Avancement du chantier',
+      'ad.chapeu': 'Avancement du chantier',
+      'ad.titulo': 'Faites glisser pour <em>comparer.</em>',
+      'ad.antes': 'Avant',
+      'ad.depois': 'Après',
+      'ad.slider': 'Comparer avant et après',
+      'ad.valor': '{n} % de la photo « avant » visible',
+      'ad.exemplo': 'Exemple',
+      'ad.demoNota': 'Exemple du composant : les vraies photos « avant » restent à envoyer.',
+      'ad.fotoAlt': 'Comparaison de la même maison',
+
       'zap.texto': 'Parler à MB2',
 
       'rod.logo': 'MB2 Incorporações',
@@ -452,6 +485,13 @@
     'rod.email': 'E-mail',
     'rod.endereco': 'Endereço',
     'rod.cnpj': 'CNPJ',
+    'ad.antes': 'Antes',
+    'ad.depois': 'Depois',
+    'ad.slider': 'Comparar antes e depois',
+    'ad.valor': '{n}% da foto de antes visível',
+    'ad.exemplo': 'Exemplo',
+    'ad.demoNota': 'Exemplo do componente: fotos reais do “antes” ainda a enviar.',
+    'ad.fotoAlt': 'Comparação da mesma casa',
     'pendente': 'a confirmar'
   };
 
