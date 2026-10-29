@@ -9,9 +9,9 @@ Projeto separado do painel de gestão de obras (`notdev13/MB2`): não misture c�
 ## Onde está o quê
 - `index.html`: a página. Textos fixos ficam aqui.
 - `css/estilo.css`: estilos, escritos primeiro para o celular. Cores, fontes, tamanhos e espaços estão
-  nos tokens do começo do arquivo (grafite, concreto, areia, verde, cobre; Manrope e Fraunces). O botão
-  lua/sol do menu troca o tema só durante a visita.
-- `js/site.js`: menu, fotos do topo (vídeo só no computador), grade de obras, contato e cadastro. Sem dependências.
+  nos tokens do começo do arquivo (grafite, concreto, areia, verde, cobre; Manrope e Fraunces). O site abre no tema
+  escuro; o botão lua/sol do menu troca o tema só durante a visita (nada é guardado).
+- `js/site.js`: menu, tour em vídeo do topo (em todas as telas; as fotos aparecem só enquanto ele não carrega), grade de obras, contato e cadastro. Sem dependências.
 - `js/i18n.js`: tradução própria. O português sai do próprio HTML; texto novo leva `data-i18n="chave"`
   (ou `data-i18n-attr="atributo:chave"`) e a frase em **todas as línguas** que o arquivo já suporta.
   Chave sem tradução cai para o português.
