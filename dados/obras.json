@@ -37,7 +37,7 @@
       "foto": "12-casa-jardim-campeche-302m2",
       "antes_depois": {
         "demo": true,
-        "antes": "12-casa-jardim-campeche-302m2",
+        "antes": null,
         "depois": "12-casa-jardim-campeche-302m2",
         "legenda_antes": null,
         "legenda_depois": null

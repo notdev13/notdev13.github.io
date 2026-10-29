@@ -150,6 +150,9 @@
       'ad.exemplo': 'Example',
       'ad.demoNota': 'Component example: the real “before” photos are still to be sent.',
       'ad.fotoAlt': 'Comparison of the same home',
+      'ad.chapeuDemo': 'Component example',
+      'ad.exCinza': 'Example · B&W',
+      'ad.exCor': 'Example · color',
 
       'zap.texto': 'Talk to MB2',
 
@@ -291,6 +294,9 @@
       'ad.exemplo': 'Ejemplo',
       'ad.demoNota': 'Ejemplo del componente: las fotos reales del “antes” aún están por enviar.',
       'ad.fotoAlt': 'Comparación de la misma casa',
+      'ad.chapeuDemo': 'Ejemplo del comparador',
+      'ad.exCinza': 'Ejemplo · B/N',
+      'ad.exCor': 'Ejemplo · color',
 
       'zap.texto': 'Habla con MB2',
 
@@ -432,6 +438,9 @@
       'ad.exemplo': 'Exemple',
       'ad.demoNota': 'Exemple du composant : les vraies photos « avant » restent à envoyer.',
       'ad.fotoAlt': 'Comparaison de la même maison',
+      'ad.chapeuDemo': 'Exemple du comparateur',
+      'ad.exCinza': 'Exemple · N&B',
+      'ad.exCor': 'Exemple · couleur',
 
       'zap.texto': 'Parler à MB2',
 
@@ -492,6 +501,9 @@
     'ad.exemplo': 'Exemplo',
     'ad.demoNota': 'Exemplo do componente: fotos reais do “antes” ainda a enviar.',
     'ad.fotoAlt': 'Comparação da mesma casa',
+    'ad.chapeuDemo': 'Exemplo do comparador',
+    'ad.exCinza': 'Exemplo · P&B',
+    'ad.exCor': 'Exemplo · cor',
     'pendente': 'a confirmar'
   };
 

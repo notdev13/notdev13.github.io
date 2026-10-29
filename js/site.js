@@ -167,7 +167,6 @@
     }
     textosDestaque();
 
-
     // ----- Antes/depois: só existe se a obra em destaque tiver o campo "antes_depois" -----
     const ad = d.antes_depois;
     if (ad && ad.depois && (ad.antes || ad.demo)) montarAntesDepois(ad);
@@ -236,14 +235,13 @@
     }
   }
 
-
   // ---------- Comparador antes/depois ----------
   // Modo demo (ad.demo): mostra a mesma foto real em cinza contra a colorida, rotulado como exemplo.
   function montarAntesDepois(ad) {
     const secao = $("#evolucao"), alvo = $("#antes-depois");
     const demo = !!ad.demo;
     const antesNome = demo ? ad.depois : ad.antes;
-    const img = (nome, cls) => `<img class="${cls}" src="imagens/obras/${nome}-480.webp" srcset="imagens/obras/${nome}-480.webp 480w, imagens/obras/${nome}-1400.webp 1400w" sizes="(min-width: 821px) 1100px, 100vw" alt="" loading="lazy" decoding="async" draggable="false">`;
+    const img = (nome, cls) => `<img class="${cls}" src="imagens/obras/${esc(nome)}-480.webp" srcset="imagens/obras/${esc(nome)}-480.webp 480w, imagens/obras/${esc(nome)}-1400.webp 1400w" sizes="(min-width: 821px) 1100px, 100vw" alt="" loading="lazy" decoding="async" draggable="false">`;
     alvo.innerHTML = `<figure class="ad">
       <div class="ad-palco${semMovimento ? "" : " ad-entra"}">
         ${img(ad.depois, "ad-img")}
@@ -264,9 +262,16 @@
         alca.setAttribute("aria-valuetext", tr("ad.valor", "{n}% da foto de antes visível").replace("{n}", v));
       }
     }
+    // No demo, nada de "Antes/Depois" ou "Evolução da obra": a foto cinza não é registro de obra
+    const chapeuAd = $(".chapeu span:last-child", secao);
+    if (demo) { chapeuAd.removeAttribute("data-i18n"); secao.removeAttribute("data-i18n-attr"); }
     function textos() {
-      $(".ad-chip-antes", alvo).textContent = tr("ad.antes", "Antes");
-      $(".ad-chip-depois", alvo).textContent = tr("ad.depois", "Depois");
+      if (demo) {
+        chapeuAd.textContent = tr("ad.chapeuDemo", "Exemplo do comparador");
+        secao.setAttribute("aria-label", tr("ad.chapeuDemo", "Exemplo do comparador"));
+      }
+      $(".ad-chip-antes", alvo).textContent = demo ? tr("ad.exCinza", "Exemplo · P&B") : tr("ad.antes", "Antes");
+      $(".ad-chip-depois", alvo).textContent = demo ? tr("ad.exCor", "Exemplo · cor") : tr("ad.depois", "Depois");
       alca.setAttribute("aria-label", tr("ad.slider", "Comparar antes e depois"));
       $$(".ad-img", alvo).forEach((i) => (i.alt = ""));
       $(".ad-legenda", alvo).innerHTML = demo
@@ -274,6 +279,7 @@
         : [ad.legenda_antes && `${esc(tr("ad.antes", "Antes"))}: ${esc(ad.legenda_antes)}`, ad.legenda_depois && `${esc(tr("ad.depois", "Depois"))}: ${esc(ad.legenda_depois)}`].filter(Boolean).join(" &nbsp;·&nbsp; ");
       palco.setAttribute("role", "group");
       palco.setAttribute("aria-label", tr("ad.fotoAlt", "Comparação da mesma casa"));
+      aplica(pos);
     }
     textos();
     document.addEventListener("mb2:lang", textos);
@@ -298,13 +304,15 @@
       palco.classList.remove("ad-entra");
       palco.setPointerCapture(e.pointerId);
       palco.classList.add("ad-arrasta");
-      aplica(daPosicao(e));
+      // No toque, só move depois do primeiro arrasto horizontal: quem põe o dedo para rolar a página não faz a divisória pular
+      if (e.pointerType !== "touch") aplica(daPosicao(e));
       alca.focus({ preventScroll: true });
     });
     palco.addEventListener("pointermove", (e) => { if (arrastando) aplica(daPosicao(e)); });
     const fim = () => { arrastando = false; palco.classList.remove("ad-arrasta"); };
     palco.addEventListener("pointerup", fim);
     palco.addEventListener("pointercancel", fim);
+    palco.addEventListener("lostpointercapture", fim);
 
     // Teclado: setas, Home/End, PageUp/PageDown
     alca.addEventListener("keydown", (e) => {
