@@ -820,7 +820,9 @@ button { font: inherit; cursor: pointer; color: inherit; }
 .js-anim .etapa:nth-child(4) { transition-delay: 0.24s; }
 
 /* Fotos grandes: o quadro fica fixo e a imagem se desloca/amplia devagar (cobre as bordas com escala) */
-.js-anim .destaque-foto, .js-anim .campeche-foto { position: absolute; inset: 0; overflow: hidden; }
+/* overflow: clip (e não hidden): hidden cria um contêiner de rolagem e a view() do CSS ficaria sem linha do tempo */
+.js-anim .destaque, .js-anim .campeche { overflow: clip; }
+.js-anim .destaque-foto, .js-anim .campeche-foto { position: absolute; inset: 0; overflow: hidden; overflow: clip; }
 .js-anim .destaque-foto img, .js-anim .campeche-foto img {
   --desloca: 2%;
   transform: translate3d(0, calc(var(--p, 0) * var(--desloca) * -1), 0) scale(calc(1.07 + var(--p, 0) * 0.02));
@@ -828,7 +830,7 @@ button { font: inherit; cursor: pointer; color: inherit; }
 }
 .js-anim .hero-conteudo {
   transform: translate3d(0, calc(var(--h, 0) * -28px), 0);
-  opacity: calc(1 - var(--h, 0) * 0.85);
+  opacity: calc(1 - var(--h, 0) * 0.6);
 }
 @media (min-width: 821px) {
   .js-anim .cinema { transform: translate3d(0, 28px, 0); }
@@ -839,7 +841,7 @@ button { font: inherit; cursor: pointer; color: inherit; }
 /* Melhoria progressiva: onde há scroll-driven animations, o navegador anima fora da thread principal */
 @supports (animation-timeline: view()) {
   @keyframes cinema-foto { from { transform: translate3d(0, 2%, 0) scale(1.06); } to { transform: translate3d(0, -2%, 0) scale(1.1); } }
-  @keyframes cinema-hero { to { transform: translate3d(0, -28px, 0); opacity: 0.15; } }
+  @keyframes cinema-hero { to { transform: translate3d(0, -28px, 0); opacity: 0.4; } }
   .js-anim .destaque-foto img, .js-anim .campeche-foto img {
     transform: none; will-change: auto;
     animation: cinema-foto linear both; animation-timeline: view(); animation-range: cover 0% cover 100%;
@@ -850,11 +852,13 @@ button { font: inherit; cursor: pointer; color: inherit; }
   }
   @media (min-width: 821px) {
     @keyframes cinema-foto-d { from { transform: translate3d(0, 3.5%, 0) scale(1.08); } to { transform: translate3d(0, -3.5%, 0) scale(1.14); } }
-    @keyframes cinema-hero-d { to { transform: translate3d(0, -48px, 0) scale(0.95); opacity: 0.15; } }
+    @keyframes cinema-hero-d { to { transform: translate3d(0, -48px, 0) scale(0.95); opacity: 0.4; } }
     .js-anim .destaque-foto img, .js-anim .campeche-foto img { transform: none; animation-name: cinema-foto-d; }
     .js-anim .hero-conteudo { transform: none; animation-name: cinema-hero-d; }
   }
 }
+
+@media print { .js-anim .cinema { opacity: 1; transform: none; transition: none; } }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
