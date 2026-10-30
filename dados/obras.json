@@ -34,7 +34,14 @@
       "suites": null,
       "vagas": null,
       "situacao": null,
-      "foto": "12-casa-jardim-campeche-302m2"
+      "foto": "12-casa-jardim-campeche-302m2",
+      "antes_depois": {
+        "demo": true,
+        "antes": null,
+        "depois": "12-casa-jardim-campeche-302m2",
+        "legenda_antes": null,
+        "legenda_depois": null
+      }
     },
     { "id": "reservato-residence", "nome": "Reservato Residence", "tipo": "residenciais", "cidade": null, "bairro": null, "area_m2": null, "suites": null, "vagas": null, "situacao": null, "foto": "01-reservato-residence" },
     { "id": "residencial-luiz-borssato", "nome": "Residencial Luiz Borssato", "tipo": "residenciais", "cidade": null, "bairro": null, "area_m2": null, "suites": null, "vagas": null, "situacao": null, "foto": "02-residencial-luiz-borssato" },
