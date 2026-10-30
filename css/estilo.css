@@ -1014,5 +1014,16 @@ button { font: inherit; cursor: pointer; color: inherit; }
 .portfolio-secao .portfolio-cabecalho { margin-top: 0; }
 
 
-/* Texto do topo "Engenharia robusta, acabamento premium.": duas linhas no computador */
-@media (min-width: 821px) { .hero h2 { font-size: clamp(44px, 4.2vw, 64px); max-width: 15.5em; } }
+/* Título do topo em Fraunces fina, em minúsculas (opção 1 escolhida por Gabriel, 30/10/2026) */
+.hero h2 {
+  font-family: var(--fonte-titulo);
+  font-weight: 300;
+  font-variation-settings: "opsz" 144;
+  text-transform: none;
+  letter-spacing: -0.015em;
+  font-size: clamp(42px, 11.5vw, 60px);
+  line-height: 1;
+  max-width: 13em;
+}
+.hero h2 em { font-weight: 300; font-size: 0.9em; margin-top: 0.12em; }
+@media (min-width: 821px) { .hero h2 { font-size: clamp(56px, 5.6vw, 84px); letter-spacing: -0.015em; max-width: 13em; } }
